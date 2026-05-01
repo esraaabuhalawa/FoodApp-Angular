@@ -1,0 +1,194 @@
+<section class="auth-container fluid-container">
+  <div class="auth-card bg-white d-flex flex-column align-items-center">
+    <header class="mb-4">
+      <img src="../../assets/images/auth-logo.svg" alt="Logo">
+    </header>
+
+    <div class="header">
+      <h1 class="text-capitalize">Register</h1>
+      <p>Welcome! Please enter your details</p>
+    </div>
+
+    <form class="w-100 row" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text text-center ps-2" id="basic-addon1">
+            <i class="fa-regular fa-user d-block"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Enter your Name" aria-label="Name"
+            aria-describedby="basic-addon1" formControlName="userName">
+        </div>
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="registerForm.get('userName')?.errors && registerForm.get('userName')?.touched">
+          <div *ngIf="registerForm.get('userName')?.errors?.['required']">User Name is required.</div>
+          <div *ngIf="registerForm.get('userName')?.errors?.['maxlength']">User Name must be at most 8 characters long.
+          </div>
+          <div *ngIf="registerForm.get('userName')?.errors?.['pattern']">The userName must contain characters and end
+            with numbers without spaces</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <img src="../../assets/images/mob.svg" alt="mob Icon">
+          </span>
+          <input type="email" class="form-control" placeholder="Enter your E-mail" aria-label="Email"
+            aria-describedby="basic-addon1" formControlName="email">
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text country-icon" id="basic-addon1">
+            <i class="fa-regular fa-flag"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Enter your country" aria-label="Name"
+            aria-describedby="basic-addon1" formControlName="country">
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
+          <div *ngIf="registerForm.get('country')?.errors?.['required']">Country is required.</div>
+        </div>
+      </div>
+
+
+      <!-- phoneNumber Input -->
+      <div class="col-12 col-md-6">
+        <ngx-intl-tel-input [cssClass]="
+          'form-control' +
+          (registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid
+            ? ' is-invalid'
+            : '')
+        " [preferredCountries]="[CountryISO.Egypt]" [enableAutoCountrySelect]="false" [searchCountryFlag]="true"
+          [searchCountryField]="[SearchCountryField.All]" [selectFirstCountry]="true"
+          formControlName="phoneNumber"></ngx-intl-tel-input>
+
+        <div class="alert alert-danger mt-2"
+          *ngIf="registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched">
+          <div *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">
+            Phone Number is required.
+          </div>
+          <div *ngIf="registerForm.get('phoneNumber')?.errors?.['validatePhoneNumber']?.valid === false">
+            Please enter a valid phone number.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3 position-relative">
+          <span class="input-group-text">
+            <img src="../../assets/images/lock.svg" alt="Lock Icon">
+          </span>
+
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password"
+            formControlName="password" />
+
+          <!-- Eye icon -->
+          <i class="fa-regular pass-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePassword()"></i>
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must be at least 6 characters long and
+            has upper , lower , (#$@4).</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3 position-relative">
+          <span class="input-group-text">
+            <img src="../../assets/images/lock.svg" alt="Lock Icon">
+          </span>
+
+          <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+            placeholder="Confirm Your Password" formControlName="confirmPassword" />
+
+          <!-- Eye icon -->
+          <i class="fa-regular pass-icon" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="toggleConfirmPassword()"></i>
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched">
+          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</div>
+          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['pattern']">Password must be at least 6 characters
+            long and has
+            upper , lower , (#$@4).
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="registerForm.errors?.['PasswordNoMatch']
+     && registerForm.get('confirmPassword')?.touched">
+          Password does'nt match.
+        </div>
+      </div>
+
+      <!------Photo Section------->
+      <label class="mb-2 text-secondary fw-semibold d-block profile-label">Profile Image</label>
+      <ngx-file-drop dropZoneLabel="Drop Your Profile image here" accept=".jpg,.jpeg,.png"
+        (onFileDrop)="onFileDrop($event)" (onFileOver)="onFileOver($event)" (onFileLeave)="onFileLeave($event)">
+
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+
+          <!-- Preview -->
+          <div *ngIf="imagePreview; else uploadPrompt" class="position-relative mt-4">
+            <img [src]="imagePreview" alt="preview" class="img-preview" />
+            <button type="button" class="btn btn-sm btn-danger remove-btn mt-2" (click)="removeImage()"><i
+                class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <!-- Upload prompt -->
+          <ng-template #uploadPrompt>
+            <div class="text-center">
+              <i class="fa fa-cloud-upload fa-2x text-success"></i>
+              <p class="mb-1 text-secondary">Drop Your Profile Image Here</p>
+              <p class="text-success">Drag & drop or
+                <button type="button" class="btn btn-link browse-btn p-0" (click)="openFileSelector()">
+                  browse
+                </button>
+              </p>
+            </div>
+          </ng-template>
+
+        </ng-template>
+      </ngx-file-drop>
+
+      <!-- Validation -->
+      <!-- <div *ngIf="registerForm.get('profileImage')?.invalid && registerForm.get('profileImage')?.touched"
+          class="text-danger mt-1">
+          Profile image is required.
+        </div> -->
+      <!------->
+
+      <div class="d-flex justify-content-end align-items-center fw-semibold mb-4 mt-3">
+        <a routerLink="/auth" class="text-decoration-none text-primary auth-link">Login Now?</a>
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="alert alert-danger" *ngIf="serverValidationErrors.length">
+        <ul>
+          <li *ngFor="let err of serverValidationErrors">{{ err }}</li>
+        </ul>
+      </div>
+
+      <button type="submit" class="w-100">
+        <div class="spinner-border text-white" role="status" *ngIf="isLoading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        Register
+      </button>
+    </form>
+  </div>
+</section>

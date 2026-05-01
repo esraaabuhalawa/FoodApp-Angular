@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('assets/styles/fonts.css');
+:root {
+  --primary-color: #4AA35A;
+  --white-color: #fff;
+  --placeholder-color: #8391A1;
+  --paragraph-color: #49494999;
+  --heading-color:#494949;
+  --link-color:#3A3A3D;
+  --input-bg:#F7F7F7;
+  --font-family: 'Roboto', sans-serif;
+  --secondary-font-family: 'Inter', sans-serif;
+}
+
+
+/*******phone intl Style***************/
+
+.iti--allow-dropdown input.iti__tel-input,
+.iti--allow-dropdown input.iti__tel-input[type='text'],
+.iti--allow-dropdown input.iti__tel-input[type='tel'],
+.iti--show-selected-dial-code input.iti__tel-input,
+.iti--show-selected-dial-code input.iti__tel-input[type='text'],
+.iti--show-selected-dial-code input.iti__tel-input[type='tel'] {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: none;
+  height: 56px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+}
+
+.iti--allow-dropdown input.iti__tel-input:focus,
+.iti--allow-dropdown input.iti__tel-input[type='text']:focus,
+.iti--allow-dropdown input.iti__tel-input[type='tel']:focus,
+.iti--show-selected-dial-code input.iti__tel-input:focus,
+.iti--show-selected-dial-code input.iti__tel-input[type='text']:focus,
+.iti--show-selected-dial-code input.iti__tel-input[type='tel']:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #fff;
+}
+
+
+.iti {
+  width: 100%;
+}
+/*submit Button*/
+button[type="submit"] {
+  font-family: var(--secondary-font-family);
+  height: 48px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  color: var(--white-color);
+  font-weight: 700;
+  font-size: 1.25rem;
+  border: 1px solid var(--primary-color);
+  transition: all .3s ease;
+}
+
+/* Hover state */
+button[type="submit"]:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* Disabled state */
+button[type="submit"]:disabled {
+  color: var(--white-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+
+.text-primary {
+  color: var(--primary-color) !important
+}
+
+.text-link {
+  color: var(--link-color) !important
+}
+
+.auth-link{
+  transition: all .3s ease;
+}
+.auth-link:hover{
+  text-decoration: underline;
+  color: #43601b!important;
+  scale: 1.05;
+}

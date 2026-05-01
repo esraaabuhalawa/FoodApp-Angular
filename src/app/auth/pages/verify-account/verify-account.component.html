@@ -1,0 +1,53 @@
+<section class="auth-container">
+  <div class="auth-card bg-white d-flex flex-column align-items-center">
+    <header class="mb-4">
+      <img src="../../assets/images/auth-logo.svg" alt="Logo">
+    </header>
+
+    <div class="header">
+      <h1 class="text-capitalize"> Verify Account </h1>
+      <p>Please Enter Your OTP or Check Your Inbox</p>
+    </div>
+
+    <form class="w-100" [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <img src="../../assets/images/mob.svg" alt="mob Icon">
+        </span>
+        <input type="email" class="form-control" placeholder="Enter your E-mail" aria-label="Email"
+          aria-describedby="basic-addon1" formControlName="email">
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert"
+        *ngIf="verifyForm.get('email')?.errors && verifyForm.get('email')?.touched">
+        <div *ngIf="verifyForm.get('email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="verifyForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
+      </div>
+
+      <div class="input-group mb-3 position-relative">
+        <span class="input-group-text">
+          <img src="../../assets/images/lock.svg" alt="Lock Icon">
+        </span>
+
+        <input [type]="'text'" class="form-control" placeholder="OTP" formControlName="code" />
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert"
+        *ngIf="verifyForm.get('code')?.errors && verifyForm.get('code')?.touched">
+        <div *ngIf="verifyForm.get('code')?.errors?.['required']">code is required.</div>
+
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="w-100" [disabled]="!verifyForm.valid">
+        <div class="spinner-border text-white" role="status" *ngIf="isLoading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        Send
+      </button>
+    </form>
+  </div>
+</section>

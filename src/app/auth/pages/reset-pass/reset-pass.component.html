@@ -1,0 +1,102 @@
+<section class="auth-container">
+  <div class="auth-card bg-white d-flex flex-column align-items-center">
+    <header class="mb-4">
+      <img src="../../assets/images/auth-logo.svg" alt="Logo">
+    </header>
+
+    <div class="header">
+      <h1 class="text-capitalize"> Verify Account </h1>
+      <p>Please Enter Your OTP or Check Your Inbox</p>
+    </div>
+
+    <form class="w-100" [formGroup]="resetPassForm" (ngSubmit)="onVerify()">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <img src="../../assets/images/mob.svg" alt="mob Icon">
+        </span>
+        <input type="email" class="form-control" placeholder="Enter your E-mail" aria-label="Email"
+          aria-describedby="basic-addon1" formControlName="email">
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert"
+        *ngIf="resetPassForm.get('email')?.errors && resetPassForm.get('email')?.touched">
+        <div *ngIf="resetPassForm.get('email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="resetPassForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
+      </div>
+      <!---Otp Code Start-->
+      <div class="input-group mb-3 position-relative">
+        <span class="input-group-text">
+          <img src="../../assets/images/lock.svg" alt="Lock Icon">
+        </span>
+
+        <input [type]="'text'" class="form-control" placeholder="OTP" formControlName="seed" />
+      </div>
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert"
+        *ngIf="resetPassForm.get('seed')?.errors && resetPassForm.get('seed')?.touched">
+        <div *ngIf="resetPassForm.get('seed')?.errors?.['required']">code is required.</div>
+      </div>
+      <!---Otp Code End-->
+
+      <!--Password start-->
+        <div class="input-group mb-3 position-relative">
+          <span class="input-group-text">
+            <img src="../../assets/images/lock.svg" alt="Lock Icon">
+          </span>
+
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password"
+            formControlName="password" />
+
+          <!-- Eye icon -->
+          <i class="fa-regular pass-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePassword()"></i>
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="resetPassForm.get('password')?.errors && resetPassForm.get('password')?.touched">
+          <div *ngIf="resetPassForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="resetPassForm.get('password')?.errors?.['pattern']">Password must be at least 6 characters long and
+            has upper , lower , (#$@4).</div>
+        </div>
+      <!--password end-->
+      <!---Confirm Password Start-->
+        <div class="input-group mb-3 position-relative">
+          <span class="input-group-text">
+            <img src="../../assets/images/lock.svg" alt="Lock Icon">
+          </span>
+
+          <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+            placeholder="Confirm Your Password" formControlName="confirmPassword" />
+
+          <!-- Eye icon -->
+          <i class="fa-regular pass-icon" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="toggleConfirmPassword()"></i>
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert"
+          *ngIf="resetPassForm.get('confirmPassword')?.errors && resetPassForm.get('confirmPassword')?.touched">
+          <div *ngIf="resetPassForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</div>
+          <div *ngIf="resetPassForm.get('confirmPassword')?.errors?.['pattern']">Password must be at least 6 characters
+            long and has
+            upper , lower , (#$@4).
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="resetPassForm.errors?.['PasswordNoMatch']
+     && resetPassForm.get('confirmPassword')?.touched">
+          Password does'nt match.
+        </div>
+      <!---Confirm Password End-->
+
+      <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="w-100" [disabled]="!resetPassForm.valid">
+        <div class="spinner-border text-white" role="status" *ngIf="isLoading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        Send
+      </button>
+    </form>
+  </div>
+</section>
