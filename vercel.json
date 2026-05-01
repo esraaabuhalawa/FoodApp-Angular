@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build -- --configuration=production",
-  "outputDirectory": "dist/food-app/browser",
+  "outputDirectory": "dist/food-app",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": null,
   "routes": [
