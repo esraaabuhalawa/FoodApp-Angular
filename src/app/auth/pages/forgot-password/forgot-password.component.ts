@@ -23,7 +23,6 @@ export class ForgotPasswordComponent implements OnInit {
     formInit(): void {
       this.forgotPassForm = this.fb.group({
         email: [null, [Validators.required, Validators.email]],
-        password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]]
       })
     }
 
@@ -34,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
         return;
       }
 
+      localStorage.setItem('emailForPasswordReset', this.forgotPassForm.value.email);
       // start loader
       this.formSub.unsubscribe();
       this.isLoading = true;
@@ -41,7 +41,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.formSub = this.authservice.RequestPasswordReset(this.forgotPassForm.value.email).subscribe({
         next: (res) => {
           this.errorMessage = '';
-          localStorage.setItem('token', res.token);
+          this.toastr.success(res.message, 'Success!');
+          this.router.navigate(['/auth/reset-password']);
           this.isLoading = false;
         },
         error: (err) => {
@@ -49,12 +50,6 @@ export class ForgotPasswordComponent implements OnInit {
           this.toastr.error(err.error.message, 'Error!');
           this.isLoading = false;
         },
-        complete: () => {
-          this.toastr.success('You are Logged In Successfully', 'Success!');
-          this.isLoading = false;
-          this.router.navigate(['/auth/reset-password']);
-        }
-
       });
     }
 

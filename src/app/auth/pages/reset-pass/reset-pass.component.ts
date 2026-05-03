@@ -13,29 +13,30 @@ import { confirmPasswordValidator } from '../../validators/custom-validators';
 })
 export class ResetPassComponent {
   resetPassForm!: FormGroup
-    constructor(private fb: FormBuilder, private authservice: AuthService,
-      private toastr: ToastrService,
-      private router: Router
-    ) { }
-    private formSub = new Subscription();
-    showPassword: boolean = false;
+  constructor(private fb: FormBuilder, private authservice: AuthService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
+
+  private formSub = new Subscription();
+  showPassword: boolean = false;
   showConfirmPassword: boolean = false;
   serverValidationErrors: any[] = [];
-    errorMessage: string = '';
-    isLoading: boolean = false;
+  errorMessage: string = '';
+  isLoading: boolean = false;
 
-    formInit(): void {
-      this.resetPassForm = this.fb.group({
-        email: [null, [Validators.required, Validators.email]],
-        seed: [null, [Validators.required]],
-        password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
-              confirmPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
-            }, {
-              validators: confirmPasswordValidator
-            })
-    }
+  formInit(): void {
+    this.resetPassForm = this.fb.group({
+      email: [{value: localStorage.getItem('emailForPasswordReset'), disabled:true}],
+      seed: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
+      confirmPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
+    }, {
+      validators: confirmPasswordValidator
+    })
+  }
 
-    togglePassword() {
+  togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
@@ -43,34 +44,32 @@ export class ResetPassComponent {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-    onVerify(): void {
-      if (this.resetPassForm.invalid) {
-        this.resetPassForm.markAllAsTouched();
-        return;
+  onVerify(): void {
+    if (this.resetPassForm.invalid) {
+      this.resetPassForm.markAllAsTouched();
+      return;
+    }
+
+    this.formSub.unsubscribe();
+    this.isLoading = true;
+    const formPayload = this.resetPassForm.getRawValue();
+    
+    this.formSub = this.authservice.RestPassword(formPayload).subscribe({
+      next: (res) => {
+        this.errorMessage = '';
+        this.isLoading = false;
+        this.toastr.success(res.message, 'Success!');
+        this.router.navigate(['/auth']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.toastr.error(err.error.message, 'Error!');
+        this.isLoading = false;
       }
+    });
+  }
 
-      this.formSub.unsubscribe();
-      this.isLoading = true;
-
-      this.formSub = this.authservice.RestPassword(this.resetPassForm.value).subscribe({
-        next: (res) => {
-          this.errorMessage = '';
-          this.router.navigate(['/auth']);
-          this.isLoading = false;
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-          this.toastr.error(err.error.message, 'Error!');
-          this.isLoading = false;
-        },
-        complete: () => {
-          this.toastr.success('Account verified successfully', 'Success!');
-          this.isLoading = false;
-        }
-      });
-    }
-
-    ngOnInit(): void {
-      this.formInit();
-    }
+  ngOnInit(): void {
+    this.formInit();
+  }
 }

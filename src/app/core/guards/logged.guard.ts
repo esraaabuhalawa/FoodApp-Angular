@@ -2,18 +2,13 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
-export const roleGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
+export const loggedGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
-  
-  if(route.data['roles']){
-    const userRole = authService.getRole();
-    if(userRole && route.data['roles'].includes(userRole)){
+    const router = inject(Router);
+
+    if(!authService.isLoggedIn()){
       return true;
     }
-
     router.navigate(['/dashboard']);
     return false;
-  }
-  return true;
 };

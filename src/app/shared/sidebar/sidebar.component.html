@@ -1,1 +1,22 @@
-<p>sidebar works!</p>
+<!-- Mobile overlay -->
+<div class="overlay" [class.show]="isMobileOpen && isMobile" (click)="isMobileOpen = false">
+</div>
+
+<!-- Sidebar -->
+<aside class="sidebar" [class.collapsed]="isSidebarCollapsed && !isMobile"
+  [class.mobile-open]="isMobileOpen && isMobile">
+
+  <div class="sidebar-logo">
+    <div class="logo-icon">A</div>
+    <span class="logo-text">AdminPanel</span>
+  </div>
+
+  <nav class="nav-section">
+    <p class="nav-label">Main</p>
+
+    <a class="nav-item" routerLink="." routerLinkActive="active">
+      <i class="nav-icon fa fa-home"></i>
+      <span class="nav-text">Dashboard</span>
+    </a>
+  </nav>
+</aside>

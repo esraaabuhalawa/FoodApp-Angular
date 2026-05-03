@@ -1,1 +1,85 @@
-<p>navbar works!</p>
+<header class="app-header">
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="breadcrumb">
+    Dashboard / <strong>Overview</strong>
+  </div>
+
+  <div class="header-right">
+    <button class="icon-btn">
+      <i class="fas fa-bell"></i>
+    </button>
+    <!-- Role Dropdown -->
+    <a class="nav-item" routerLink="userPortal" routerLinkActive="active" *ngIf="toggleUser()">
+      <i class="nav-icon fa fa-user"></i>
+      <span class="nav-text">User Portal</span>
+    </a>
+
+    <a class="nav-item" routerLink="admin" routerLinkActive="active" *ngIf="!toggleUser()">
+      <i class="nav-icon fa fa-shield "></i>
+      <span class="nav-text">Admin</span>
+    </a>
+
+    <!-- User Dropdown -->
+    <div>
+      <div *ngIf="userData$ | async as user" dropdown placement="top" container="body">
+
+        <!-- Trigger -->
+        <div class="user-row" dropdownToggle>
+          <div class="avatar">{{ user.userName.slice(0,2).toUpperCase() }}</div>
+          <div class="user-info">
+            <p class="user-name">{{ user.userName }}</p>
+            <p class="user-role">{{ user.userGroup }}</p>
+          </div>
+          <i class="bi bi-chevron-up ms-auto chevron-icon"></i>
+        </div>
+
+        <!-- Menu -->
+        <ul *dropdownMenu class="dropdown-menu sidebar-dropdown" role="menu" style="left: auto; right: 0;top:60px"
+          role="menu">
+
+          <!-- Header -->
+          <li class="dropdown-header">
+            <div class="d-flex align-items-center gap-2">
+              <div class="avatar avatar-sm">{{ user.userName.slice(0,2).toUpperCase() }}</div>
+              <div>
+                <p class="mb-0 user-name">{{ user.userName }}</p>
+                <small class="user-role">{{ user.userEmail }}</small>
+              </div>
+            </div>
+          </li>
+
+          <li class="divider dropdown-divider"></li>
+
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="/dashboard/profile">
+              <i class="bi bi-person me-2"></i> Profile
+            </a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="/dashboard/settings">
+              <i class="bi bi-gear me-2"></i> Settings
+            </a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="/dashboard/change-password">
+              <i class="bi bi-key me-2"></i> Change Password
+            </a>
+          </li>
+
+          <li class="divider dropdown-divider"></li>
+
+          <li role="menuitem" class="my-2">
+            <a class="dropdown-item text-danger" (click)="logout()">
+              <i class="fa fa-sign-out-alt me-2"></i> Logout
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</header>

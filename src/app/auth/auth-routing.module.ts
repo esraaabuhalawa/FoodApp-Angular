@@ -7,7 +7,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 
 const routes: Routes = [
-  { path: '', component: AuthComponent, },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: AuthComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-account', component: VerifyAccountComponent },

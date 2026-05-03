@@ -46,20 +46,16 @@ export class AuthComponent implements OnInit {
     this.formSub = this.authservice.onLogin(this.loginForm.value).subscribe({
       next: (res) => {
         this.errorMessage = '';
-        localStorage.setItem('token', res.token);
+        this.toastr.success('You are Logged In Successfully', 'Success!');
+        //localStorage.setItem('token', res.token);
         this.isLoading = false;
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Something went wrong';
         this.toastr.error(err.error.message, 'Error!');
         this.isLoading = false;
-      },
-      complete: () => {
-        this.toastr.success('You are Logged In Successfully', 'Success!');
-        this.isLoading = false;
-        this.router.navigate(['/dashboard']);
       }
-
     });
   }
 

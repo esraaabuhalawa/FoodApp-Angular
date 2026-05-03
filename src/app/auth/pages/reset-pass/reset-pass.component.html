@@ -18,11 +18,6 @@
           aria-describedby="basic-addon1" formControlName="email">
       </div>
 
-      <div class="alert alert-danger d-flex align-items-center" role="alert"
-        *ngIf="resetPassForm.get('email')?.errors && resetPassForm.get('email')?.touched">
-        <div *ngIf="resetPassForm.get('email')?.errors?.['required']">Email is required.</div>
-        <div *ngIf="resetPassForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
-      </div>
       <!---Otp Code Start-->
       <div class="input-group mb-3 position-relative">
         <span class="input-group-text">
@@ -91,7 +86,7 @@
         {{ errorMessage }}
       </div>
 
-      <button type="submit" class="w-100" [disabled]="!resetPassForm.valid">
+      <button type="submit" class="w-100">
         <div class="spinner-border text-white" role="status" *ngIf="isLoading">
           <span class="visually-hidden">Loading...</span>
         </div>
