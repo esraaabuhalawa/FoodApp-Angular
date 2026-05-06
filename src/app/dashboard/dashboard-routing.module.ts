@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        canActivate: [redirectGuardGuard], 
+        canActivate: [redirectGuardGuard],
         component: DashboardComponent
       },
       {
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'userPortal',
-        data: { roles: ['SystemUser'] },
+        data: { roles: ['SystemUser','SuperAdmin'] },
         canActivate: [roleGuard],
         loadChildren: () =>
           import('../user-portal/user-portal.module').then(m => m.UserPortalModule)

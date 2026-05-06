@@ -6,12 +6,13 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { VerifyAccountComponent } from './pages/verify-account/verify-account.component';
-import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
+import { FormInputComponent } from './components/form-input/form-input.component';
+import { AuthHeaderComponent } from './components/auth-header/auth-header.component';
 
 
 @NgModule({
@@ -20,9 +21,10 @@ import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
     LoginComponent,
     RegisterComponent,
     VerifyAccountComponent,
-    AuthLayoutComponent,
     ForgotPasswordComponent,
-    ResetPassComponent
+    ResetPassComponent,
+    FormInputComponent,
+    AuthHeaderComponent
   ],
   imports: [
     CommonModule,

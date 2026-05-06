@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { NgxFileDropEntry, FileSystemFileEntry } from 'ngx-file-drop';
-
 import { Subscription } from 'rxjs';
 import { confirmPasswordValidator } from '../../validators/custom-validators';
 import { Router } from '@angular/router';
@@ -19,13 +18,15 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private authservice: AuthService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router) {
+      this.formInit();
+    }
 
   private formSub = new Subscription();
   errorMessage: string = '';
   isLoading: boolean = false;
-  showPassword: boolean = false;
-  showConfirmPassword: boolean = false;
+  // showPassword: boolean = false;
+  // showConfirmPassword: boolean = false;
   serverValidationErrors: any[] = [];
   // tel input values
   SearchCountryField = SearchCountryField;
@@ -73,19 +74,23 @@ export class RegisterComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       profileImage: [null],
       password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
-      confirmPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#?&]{8,}$/)]],
+      confirmPassword: [null, [Validators.required,]],
     }, {
       validators: confirmPasswordValidator
     })
   }
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
+  getControl(controlName: string): FormControl {
+    return this.registerForm.get(controlName) as FormControl;
   }
 
-  toggleConfirmPassword() {
-    this.showConfirmPassword = !this.showConfirmPassword;
-  }
+  // togglePassword() {
+  //   this.showPassword = !this.showPassword;
+  // }
+
+  // toggleConfirmPassword() {
+  //   this.showConfirmPassword = !this.showConfirmPassword;
+  // }
 
   onRegister(): void {
     if (this.registerForm.invalid) {
@@ -111,7 +116,6 @@ export class RegisterComponent implements OnInit {
       next: (res) => {
         this.errorMessage = '';
         this.toastr.success(res.message, 'Success!');
-        this.router.navigate(['/auth/verify-account']);
         this.isLoading = false;
       },
       error: (err) => {
@@ -130,11 +134,11 @@ export class RegisterComponent implements OnInit {
       },
       complete: () => {
         this.isLoading = false;
+        this.router.navigate(['/auth/verify-account']);
       }
     });
   }
 
   ngOnInit(): void {
-    this.formInit();
   }
 }

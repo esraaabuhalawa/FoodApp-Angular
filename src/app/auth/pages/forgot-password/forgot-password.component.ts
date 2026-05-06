@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -12,48 +12,52 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPassForm!: FormGroup
-    constructor(private fb: FormBuilder, private authservice: AuthService,
-      private toastr: ToastrService,
-      private router: Router
-    ) { }
-    private formSub = new Subscription();
-    errorMessage: string = '';
-    isLoading: boolean = false;
+  constructor(private fb: FormBuilder, private authservice: AuthService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
+  private formSub = new Subscription();
+  errorMessage: string = '';
+  isLoading: boolean = false;
 
-    formInit(): void {
-      this.forgotPassForm = this.fb.group({
-        email: [null, [Validators.required, Validators.email]],
-      })
+  formInit(): void {
+    this.forgotPassForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+    })
+  }
+
+  onLogin(): void {
+    if (this.forgotPassForm.invalid) {
+      this.forgotPassForm.markAllAsTouched();
+      this.isLoading = false;
+      return;
     }
 
-    onLogin(): void {
-      if (this.forgotPassForm.invalid) {
-        this.forgotPassForm.markAllAsTouched();
+    localStorage.setItem('emailForPasswordReset', this.forgotPassForm.value.email);
+    // start loader
+    this.formSub.unsubscribe();
+    this.isLoading = true;
+
+    this.formSub = this.authservice.RequestPasswordReset(this.forgotPassForm.value.email).subscribe({
+      next: (res) => {
+        this.errorMessage = '';
+        this.toastr.success(res.message, 'Success!');
+        this.router.navigate(['/auth/reset-password']);
         this.isLoading = false;
-        return;
-      }
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Something went wrong';
+        this.toastr.error(err.error.message, 'Error!');
+        this.isLoading = false;
+      },
+    });
+  }
 
-      localStorage.setItem('emailForPasswordReset', this.forgotPassForm.value.email);
-      // start loader
-      this.formSub.unsubscribe();
-      this.isLoading = true;
+  getControl(controlName: string): FormControl {
+    return this.forgotPassForm.get(controlName) as FormControl
+  }
 
-      this.formSub = this.authservice.RequestPasswordReset(this.forgotPassForm.value.email).subscribe({
-        next: (res) => {
-          this.errorMessage = '';
-          this.toastr.success(res.message, 'Success!');
-          this.router.navigate(['/auth/reset-password']);
-          this.isLoading = false;
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'Something went wrong';
-          this.toastr.error(err.error.message, 'Error!');
-          this.isLoading = false;
-        },
-      });
-    }
-
-    ngOnInit(): void {
-      this.formInit();
-    }
+  ngOnInit(): void {
+    this.formInit();
+  }
 }
