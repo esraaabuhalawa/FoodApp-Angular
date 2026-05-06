@@ -22,7 +22,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-header img {
+/* header img {
   width: 150px;
 }
 
@@ -45,110 +45,29 @@ header img {
   color: var(--heading-color);
   margin-bottom: 8px;
 }
-.header p{
+.header p {
   color: var(--paragraph-color);
   font-weight: 400;
   font-size: 1rem;
-}
-
-::placeholder {
-  color: var(--placeholder-color) !important;
-  font-weight: 500;
-  font-size: .9375rem;
-  font-family: var(--secondary-font-family);
-  line-height: 125%;
-}
-
-.input-group input {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border: none;
-  height: 56px;
-  background-color: var(--input-bg);
-  border-radius: 8px;
-}
-
-.input-group-text {
-  border: none;
-  background-color: var(--input-bg);
-  padding: 16px;
-  position: relative;
-}
-
-.input-group-text.country-icon {
-  padding: 16px 12px;
-}
-
-.input-group-text i {
-  color: var(--placeholder-color);
-}
-
-.input-group-text::after {
-  content: '';
-  position: absolute;
-  right: 2px;
-  top: 20%;
-  height: 60%;
-  width: 1px;
-  background-color: var(--placeholder-color);
-}
-
-.input-group {
-  position: relative;
-}
-
-.input-group i.pass-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #6c757d;
-  z-index: 5;
-  font-size: 16px;
-}
-
-.input-group input {
-  padding-right: 40px;
-}
-
-.input-group {
-  border-radius: 8px;
-}
-
-.input-group:focus-within {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
-}
-
-/* Remove default bootstrap input border so group border is visible */
-.input-group .form-control {
-  border: none;
-  box-shadow: none;
-}
-
-.input-group .form-control:focus {
-  outline: none;
-  box-shadow: none;
-}
+} */
 
 .spinner-border {
   width: 20px;
   height: 20px;
 }
 
- /* styles.scss or component.scss */
- .img-preview{
-      width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 43px;
- }
- .remove-btn{
+/* styles.scss or component.scss */
+.img-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 43px;
+}
+.remove-btn {
   position: absolute;
   top: 0px;
   right: -15px;
- }
+}
 ::ng-deep .ngx-file-drop__drop-zone {
   border: 2px dashed #ccc;
   border-radius: 12px;
@@ -160,10 +79,9 @@ header img {
   height: auto !important;
 }
 
- ::ng-deep .ngx-file-drop__drop-zone {
-    border: 2px dotted #80be8b !important;
-  }
-
+::ng-deep .ngx-file-drop__drop-zone {
+  border: 2px dotted #80be8b !important;
+}
 
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {
@@ -171,7 +89,7 @@ header img {
     max-width: 55%;
   }
 
-  header img {
+  /* header img {
     width: 366px;
-  }
+  } */
 }

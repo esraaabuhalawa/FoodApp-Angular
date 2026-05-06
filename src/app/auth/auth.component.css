@@ -21,7 +21,7 @@
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
+/*
 header img {
   width: 150px;
 }
@@ -89,14 +89,13 @@ header img {
 .input-group {
   position: relative;
 }
-
-.input-group i {
+.input-group i{color: #6c757d;}
+.input-group i.pass-icon {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #6c757d;
   z-index: 5;
   font-size: 16px;
 }
@@ -110,10 +109,10 @@ header img {
 .input-group:focus-within {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
-}
+} */
 
 /* Remove default bootstrap input border so group border is visible */
-.input-group .form-control {
+/* .input-group .form-control {
   border: none;
   box-shadow: none;
 }
@@ -121,9 +120,9 @@ header img {
 .input-group .form-control:focus {
   outline: none;
   box-shadow: none;
-}
+} */
 
-button {
+/* button {
   font-family: var(--secondary-font-family);
   height: 48px;
   background-color: var(--primary-color);
@@ -133,7 +132,7 @@ button {
   font-size: 1.25rem;
   border: 1px solid var(--primary-color);
   transition: all .3s ease;
-}
+} */
 
 .spinner-border {
   width: 20px;
@@ -141,20 +140,20 @@ button {
 }
 
 /* Hover state */
-button:hover {
+/* button:hover {
   background-color: var(--primary-color);
   transform: translateY(-1px);
   opacity: 0.9;
-}
+} */
 
 /* Disabled state */
-button:disabled {
+/* button:disabled {
   background-color: #948f8f;
   color: #ffffff;
   cursor: not-allowed;
   opacity: 0.7;
   transform: none;
-}
+} */
 
 
 /*********** Responsive Styles * **********/
@@ -163,7 +162,7 @@ button:disabled {
     max-width: 55%;
   }
 
-  header img {
+  /* header img {
     width: 366px;
-  }
+  } */
 }
