@@ -12,58 +12,17 @@
         <app-form-input [control]="getControl('userName')" placeholder="Enter your Name" iconClass="fa-regular fa-user"
           [patternErrorMessage]="'The userName must contain characters and end with numbers without spaces'"
           [maxLengthErrorMessage]="'User Name must be at most 8 characters long.'" />
-        <!-- <div class="input-group mb-3">
-          <span class="input-group-text text-center ps-2" id="basic-addon1">
-            <i class="fa-regular fa-user d-block"></i>
-          </span>
-          <input type="text" class="form-control" placeholder="Enter your Name" aria-label="Name"
-            aria-describedby="basic-addon1" formControlName="userName">
-        </div> -->
-        <!-- <div class="alert alert-danger d-flex align-items-center" role="alert"
-          *ngIf="registerForm.get('userName')?.errors && registerForm.get('userName')?.touched">
-          <div *ngIf="registerForm.get('userName')?.errors?.['required']">User Name is required.</div>
-          <div *ngIf="registerForm.get('userName')?.errors?.['maxlength']">User Name must be at most 8 characters long.
-          </div>
-          <div *ngIf="registerForm.get('userName')?.errors?.['pattern']">The userName must contain characters and end
-            with numbers without spaces</div>
-        </div> -->
       </div>
 
       <div class="col-12 col-md-6">
         <app-form-input [control]="getControl('email')" placeholder="Enter your Email"
           iconClass="fa-regular fa-envelope" />
-        <!-- <div class="input-group mb-3">
-          <span class="input-group-text text-center ps-2" id="basic-addon1">
-            <i class="fa-regular fa-envelope"></i>
-          </span>
-          <input type="email" class="form-control" placeholder="Enter your E-mail" aria-label="Email"
-            aria-describedby="basic-addon1" formControlName="email">
-        </div>
-
-        <div class="alert alert-danger d-flex align-items-center" role="alert"
-          *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
-          <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
-        </div> -->
       </div>
       <!-- country Input -->
       <div class="col-12 col-md-6">
         <app-form-input [control]="getControl('country')" placeholder="Enter your country"
           iconClass="fa-regular fa-flag" />
-
-        <!-- <div class="input-group mb-3">
-          <span class="input-group-text country-icon" id="basic-addon1">
-            <i class="fa-regular fa-flag"></i>
-          </span>
-          <input type="text" class="form-control" placeholder="Enter your country" aria-label="Name"
-            aria-describedby="basic-addon1" formControlName="country">
-        </div>
-
-        <div class="alert alert-danger d-flex align-items-center" role="alert"
-          *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
-          <div *ngIf="registerForm.get('country')?.errors?.['required']">Country is required.</div>
-        </div> -->
-      </div>
+     </div>
 
       <!-- phoneNumber Input -->
       <div class="col-12 col-md-6">
@@ -92,58 +51,12 @@
           iconClass="fa-solid fa-lock"
           [patternErrorMessage]="'Password must be at least 6 characters long and has upper, lower, (#$@4)'"
           [showToggle]="true"/>
-
-        <!-- <div class="input-group mb-3 position-relative">
-          <span class="input-group-text">
-            <i class="fa-solid fa-lock"></i>
-          </span>
-
-          <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password"
-            formControlName="password" />
-
-
-          <i class="fa-regular pass-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
-            (click)="togglePassword()"></i>
-        </div> -->
-
-        <!-- <div class="alert alert-danger d-flex align-items-center" role="alert"
-          *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
-          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
-          <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must be at least 6 characters long and
-            has upper , lower , (#$@4).</div>
-        </div> -->
       </div>
 
       <div class="col-12 col-md-6">
         <app-form-input [control]="getControl('confirmPassword')" placeholder="confirm Password"
           [formGroup]="registerForm" formErrorKey="PasswordNoMatch" formErrorMessage="Password doesn't match"
           iconClass="fa-solid fa-lock" [showToggle]="true"/>
-
-        <!-- <div class="input-group mb-3 position-relative">
-          <span class="input-group-text">
-            <i class="fa-solid fa-lock"></i>
-          </span>
-
-          <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
-            placeholder="Confirm Your Password" formControlName="confirmPassword" />
-
-
-          <i class="fa-regular pass-icon" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
-            (click)="toggleConfirmPassword()"></i>
-        </div> -->
-
-        <!-- <div class="alert alert-danger d-flex align-items-center" role="alert"
-          *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched">
-          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</div>
-          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['pattern']">Password must be at least 6 characters
-            long and has
-            upper , lower , (#$@4).
-          </div>
-        </div>
-        <div class="alert alert-danger" *ngIf="registerForm.errors?.['PasswordNoMatch']
-     && registerForm.get('confirmPassword')?.touched">
-          Password does'nt match.
-        </div> -->
       </div>
 
       <!------Photo Section------->

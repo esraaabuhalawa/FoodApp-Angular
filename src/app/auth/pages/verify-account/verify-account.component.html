@@ -14,34 +14,6 @@
       <app-form-input [control]="getControl('code')" placeholder="OTP" iconClass="fa-solid fa-lock"/>
       <!---Otp Code End-->
 
-      <!-- <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">
-          <img src="../../assets/images/mob.svg" alt="mob Icon">
-        </span>
-        <input type="email" class="form-control" placeholder="Enter your E-mail" aria-label="Email"
-          aria-describedby="basic-addon1" formControlName="email">
-      </div>
-
-      <div class="alert alert-danger d-flex align-items-center" role="alert"
-        *ngIf="verifyForm.get('email')?.errors && verifyForm.get('email')?.touched">
-        <div *ngIf="verifyForm.get('email')?.errors?.['required']">Email is required.</div>
-        <div *ngIf="verifyForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
-      </div> -->
-
-      <!-- <div class="input-group mb-3 position-relative">
-        <span class="input-group-text">
-          <i class="fa-solid fa-lock"></i>
-        </span>
-
-        <input [type]="'text'" class="form-control" placeholder="OTP" formControlName="code" />
-      </div>
-
-      <div class="alert alert-danger d-flex align-items-center" role="alert"
-        *ngIf="verifyForm.get('code')?.errors && verifyForm.get('code')?.touched">
-        <div *ngIf="verifyForm.get('code')?.errors?.['required']">code is required.</div>
-
-      </div> -->
-
       <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
         {{ errorMessage }}
       </div>
