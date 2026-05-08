@@ -18,15 +18,15 @@ export class AuthComponent implements OnInit {
   ) {
     this.formInit();
   }
-  
+
   private formSub = new Subscription();
-  showPassword: boolean = false;
+  // showPassword: boolean = false;
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
+  // togglePassword() {
+  //   this.showPassword = !this.showPassword;
+  // }
 
   formInit(): void {
     this.loginForm = this.fb.group({

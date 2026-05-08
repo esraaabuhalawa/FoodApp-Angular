@@ -31,4 +31,11 @@ export class FormInputComponent {
   hasFormError(): boolean {
     return !!(this.formGroup?.errors?.[this.formErrorKey!] && this.control?.touched);
   }
+
+  trimValue(){
+    const value = this.control.value;
+    if(typeof value === 'string'){
+      this.control.setValue(value.trim())
+    }
+  }
 }

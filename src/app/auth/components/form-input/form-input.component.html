@@ -9,7 +9,7 @@
 
   <!-- Input -->
   <input class="form-control" [type]="showToggle ? (showPassword ? 'text' : 'password') : type"
-    [placeholder]="placeholder" [formControl]="control" />
+    [placeholder]="placeholder" [formControl]="control" (blur)="trimValue()" />
 
   <!-- Password Toggle-->
   <i *ngIf="showToggle" class="fa-regular pass-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
