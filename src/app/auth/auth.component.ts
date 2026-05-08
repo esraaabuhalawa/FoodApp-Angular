@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
   loginForm!: FormGroup
   constructor(private fb: FormBuilder, private authservice: AuthService,
     private toastr: ToastrService,
@@ -20,13 +20,8 @@ export class AuthComponent implements OnInit {
   }
 
   private formSub = new Subscription();
-  // showPassword: boolean = false;
   errorMessage: string = '';
   isLoading: boolean = false;
-
-  // togglePassword() {
-  //   this.showPassword = !this.showPassword;
-  // }
 
   formInit(): void {
     this.loginForm = this.fb.group({
@@ -50,7 +45,6 @@ export class AuthComponent implements OnInit {
       next: (res) => {
         this.errorMessage = '';
         this.toastr.success('You are Logged In Successfully', 'Success!');
-        //localStorage.setItem('token', res.token);
         this.isLoading = false;
       },
       error: (err) => {
@@ -67,8 +61,5 @@ export class AuthComponent implements OnInit {
 
   getControl(controlName:string) : FormControl{
     return this.loginForm.get(controlName) as FormControl
-  }
-
-  ngOnInit(): void {
   }
 }
