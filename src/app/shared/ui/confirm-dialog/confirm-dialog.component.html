@@ -1,0 +1,26 @@
+<div class="modal-header border-0 pb-0">
+  <button type="button" class="btn-close text-danger" (click)="cancel()">
+  </button>
+</div>
+
+<div class="modal-body w-100 d-flex flex-column justify-content-center align-items-center py-4">
+  <div class="loader-container flex-column py-5 d-flex justify-content-center align-items-center h-100">
+    <div class="img-container">
+      <img src="../../../../assets/images/empty-image.png" alt="empty" class="img-fluid">
+    </div>
+    <strong>Delete This Item ?</strong>
+    <p class="">
+      {{ message }}
+    </p>
+  </div>
+
+  <div class="modal-footer d-flex justify-content-end border-0 pt-0">
+    <button class="btn btn-outline-dark" (click)="cancel()">
+      Cancel
+    </button>
+
+    <button class="btn btn-outline-danger" (click)="confirm()">
+      Delete this item
+    </button>
+  </div>
+</div>

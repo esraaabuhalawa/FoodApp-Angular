@@ -2,12 +2,13 @@
   <div class="auth-card bg-white d-flex flex-column align-items-center">
     <!----Auth Header------->
     <div class="w-100">
-          <app-auth-header [title]="'Log In'" [description]="'Welcome Back! Please enter your details'" />
+      <app-auth-header [title]="'Log In'" [description]="'Welcome Back! Please enter your details'" />
     </div>
     <!------------>
 
     <form class="w-100" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <app-form-input [control]="getControl('email')" placeholder="Enter your Email" iconClass="fa-regular fa-envelope"/>
+      <app-form-input [control]="getControl('email')" placeholder="Enter your Email"
+        iconClass="fa-regular fa-envelope" />
       <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa-regular fa-envelope"></i>
@@ -23,7 +24,7 @@
       </div> -->
       <app-form-input [control]="getControl('password')" placeholder="Enter Your Password" iconClass="fa-solid fa-lock"
         [patternErrorMessage]="'Password must be at least 6 characters long and has upper, lower, (#$@4)'"
-        [showToggle]="true"/>
+        [showToggle]="true" />
       <!-- <div class="input-group mb-3 position-relative">
         <span class="input-group-text">
           <i class="fa-solid fa-lock"></i>
