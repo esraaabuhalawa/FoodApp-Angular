@@ -133,7 +133,7 @@
 
               <!-- Edit -->
               <li role="menuitem">
-                <a class="dropdown-item" routerLink="/dashboard/admin/recipes/add">
+                <a class="dropdown-item" [routerLink]="'/dashboard/admin/recipes/edit/' + recipe.id">
                   <i class="fa fa-pen me-2"></i> Edit
                 </a>
               </li>
