@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 import { UserPortalRoutingModule } from './user-portal-routing.module';
 import { UserPortalComponent } from './user-portal.component';
 
-
 @NgModule({
   declarations: [
-    UserPortalComponent
+    UserPortalComponent,
   ],
   imports: [
     CommonModule,

@@ -1,26 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('assets/styles/fonts.css');
+@import url("assets/styles/fonts.css");
 :root {
-  --primary-color: #4AA35A;
+  --primary-color: #4aa35a;
+  --secondary-color: #1f263e;
+  --nav-link: rgb(0, 146, 71);
+  --nav-active: rgba(0, 146, 71, 10%);
   --white-color: #fff;
-  --placeholder-color: #8391A1;
+  --header-bg: #f2f3f6;
+  /* #f8f9fb; */
+  --placeholder-color: #8391a1;
   --paragraph-color: #49494999;
-  --heading-color:#494949;
-  --link-color:#3A3A3D;
-  --input-bg:#F7F7F7;
-  --font-family: 'Roboto', sans-serif;
-  --secondary-font-family: 'Inter', sans-serif;
+  --heading-color: #494949;
+  --link-color: #3a3a3d;
+  --input-bg: #f7f7f7;
+  --white-10: #dfe0e0;
+  --font-family: "Roboto", sans-serif;
+  --secondary-font-family: "Inter", sans-serif;
 }
 
-
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
 /*******phone intl Style***************/
-
 .iti--allow-dropdown input.iti__tel-input,
-.iti--allow-dropdown input.iti__tel-input[type='text'],
-.iti--allow-dropdown input.iti__tel-input[type='tel'],
+.iti--allow-dropdown input.iti__tel-input[type="text"],
+.iti--allow-dropdown input.iti__tel-input[type="tel"],
 .iti--show-selected-dial-code input.iti__tel-input,
-.iti--show-selected-dial-code input.iti__tel-input[type='text'],
-.iti--show-selected-dial-code input.iti__tel-input[type='tel'] {
+.iti--show-selected-dial-code input.iti__tel-input[type="text"],
+.iti--show-selected-dial-code input.iti__tel-input[type="tel"] {
   padding-top: 12px;
   padding-bottom: 12px;
   border: none;
@@ -30,16 +39,15 @@
 }
 
 .iti--allow-dropdown input.iti__tel-input:focus,
-.iti--allow-dropdown input.iti__tel-input[type='text']:focus,
-.iti--allow-dropdown input.iti__tel-input[type='tel']:focus,
+.iti--allow-dropdown input.iti__tel-input[type="text"]:focus,
+.iti--allow-dropdown input.iti__tel-input[type="tel"]:focus,
 .iti--show-selected-dial-code input.iti__tel-input:focus,
-.iti--show-selected-dial-code input.iti__tel-input[type='text']:focus,
-.iti--show-selected-dial-code input.iti__tel-input[type='tel']:focus {
+.iti--show-selected-dial-code input.iti__tel-input[type="text"]:focus,
+.iti--show-selected-dial-code input.iti__tel-input[type="tel"]:focus {
   outline: none;
   border-color: var(--primary-color);
   background-color: #fff;
 }
-
 
 .iti {
   width: 100%;
@@ -54,10 +62,24 @@ button[type="submit"] {
   font-weight: 700;
   font-size: 1.25rem;
   border: 1px solid var(--primary-color);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
+}
+
+.main-button {
+  font-family: var(--secondary-font-family);
+  height: 48px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  padding: 8px 30px;
+  color: var(--white-color);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s ease;
 }
 
 /* Hover state */
+.main-button:hover,
 button[type="submit"]:hover {
   background-color: var(--primary-color);
   transform: translateY(-1px);
@@ -79,18 +101,98 @@ button[type="submit"]:disabled {
 } */
 
 .text-primary {
-  color: var(--primary-color) !important
+  color: var(--primary-color) !important;
 }
 
 .text-link {
-  color: var(--link-color) !important
+  color: var(--link-color) !important;
 }
 
-.auth-link{
-  transition: all .3s ease;
+.auth-link {
+  transition: all 0.3s ease;
 }
-.auth-link:hover{
+.auth-link:hover {
   text-decoration: underline;
-  color: #43601b!important;
+  color: #43601b !important;
   scale: 1.05;
+}
+/**********paginataion Styling***************/
+/* Pagination Container */
+.ngx-pagination {
+  display: flex !important;
+
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0;
+  margin-top: 24px;
+}
+
+/* List items */
+.ngx-pagination li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Links + buttons + active page */
+.ngx-pagination a,
+.ngx-pagination button,
+.ngx-pagination .current {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Normal pages */
+.ngx-pagination a {
+  background: #fdfffb;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+/* Hover */
+.ngx-pagination a:hover {
+  background: #f3f4f6;
+}
+
+/* Active page */
+.ngx-pagination .current {
+  background: var(--primary-color) !important;
+  color: #fff;
+  border: 1px solid var(--primary-color) !important;
+}
+
+/* Prev & Next buttons */
+.ngx-pagination .pagination-previous a,
+.ngx-pagination .pagination-next a {
+  width: auto;
+  min-width: 90px;
+  padding: 0 16px;
+}
+
+/* Disabled state */
+.ngx-pagination .disabled {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 90px;
+  height: 40px;
+
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -8,15 +8,18 @@ import { GeneralInterceptor } from './core/interceptors/general.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './shared/layout/home/home.component';
-
-
+import { ConfirmDialogComponent } from './shared/ui/confirm-dialog/confirm-dialog.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ConfirmDialogComponent,
+
   ],
   imports: [
     BrowserModule,
+    ModalModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

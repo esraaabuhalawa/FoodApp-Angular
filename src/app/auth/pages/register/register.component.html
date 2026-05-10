@@ -22,7 +22,7 @@
       <div class="col-12 col-md-6">
         <app-form-input [control]="getControl('country')" placeholder="Enter your country"
           iconClass="fa-regular fa-flag" />
-     </div>
+      </div>
 
       <!-- phoneNumber Input -->
       <div class="col-12 col-md-6">
@@ -50,13 +50,13 @@
         <app-form-input [control]="getControl('password')" placeholder="Enter Your Password"
           iconClass="fa-solid fa-lock"
           [patternErrorMessage]="'Password must be at least 6 characters long and has upper, lower, (#$@4)'"
-          [showToggle]="true"/>
+          [showToggle]="true" />
       </div>
 
       <div class="col-12 col-md-6">
         <app-form-input [control]="getControl('confirmPassword')" placeholder="confirm Password"
           [formGroup]="registerForm" formErrorKey="PasswordNoMatch" formErrorMessage="Password doesn't match"
-          iconClass="fa-solid fa-lock" [showToggle]="true"/>
+          iconClass="fa-solid fa-lock" [showToggle]="true" />
       </div>
 
       <!------Photo Section------->

@@ -1,6 +1,7 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+
   justify-content: center;
   align-items: center;
   background:
@@ -52,7 +53,6 @@
   font-size: 1rem;
 } */
 
-
 .spinner-border {
   width: 20px;
   height: 20px;
@@ -86,7 +86,6 @@
 ::ng-deep .ngx-file-drop__drop-zone {
   border: 2px dotted #80be8b !important;
 }
-
 
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {

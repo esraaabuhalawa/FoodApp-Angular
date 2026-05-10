@@ -1,0 +1,245 @@
+.home-section {
+  background-image: url("../../../assets/images/home-abstract.png");
+  background-position: center;
+  background-size: cover;
+  background-color: #009247;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.home-section header h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--white-color);
+}
+
+.home-section header h1,
+.home-section header p {
+  font-family: var(--font-family);
+  text-align: center;
+}
+
+.home-section header h1 span,
+.home-section header p {
+  font-weight: 400;
+  color: var(--white-10);
+}
+
+.home-section header h1 span {
+  font-size: 2rem;
+}
+
+.home-section header p {
+  font-size: 16px;
+  letter-spacing: 4%;
+  line-height: 24px;
+}
+
+.button-container,
+.img-container {
+  text-align: center;
+}
+
+/******recipes-heading*****/
+.recipes-heading {
+  margin-top: 26px;
+  margin-bottom: 28px;
+}
+
+.recipes-heading h2,
+.recipes-heading p {
+  font-family: var(--font-family);
+  color: #1f263e;
+}
+
+.recipes-heading h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.recipes-heading p {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+/*******table**********/
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table thead {
+  background-color: #e2e5eb;
+  height: 88px;
+  vertical-align: middle;
+}
+
+table thead th:first-child {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+table thead th:last-child {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+table thead th {
+  background-color: #e2e5eb;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  color: #1f263e;
+}
+
+table tbody td {
+  font-weight: 400;
+  text-align: center;
+  font-size: 0.875rem;
+  font-family: var(--font-family);
+  color: #3a3a3d;
+  vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #f8f9fb !important;
+}
+
+/* table.table.table-striped > tbody > tr:nth-of-type(odd) > td,
+table.table.table-striped > tbody > tr:nth-of-type(odd) > th {
+  background-color: #F8F9FB !important;
+} */
+
+table tbody tr {
+  vertical-align: middle;
+}
+
+table .img-content {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+table .img-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.drop-down-toggler {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-down-toggler:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-menu.show {
+  left: auto;
+  right: 12px;
+  top: 8px;
+}
+
+/********Search styling***************/
+.input-group .form-control,
+.input-group,
+.input-group-text {
+  height: 40px;
+}
+
+.input-group {
+  border-radius: 8px;
+  background-color: var(--white-color);
+}
+
+.input-group-text {
+  border-radius: 8px;
+  background: #fff;
+  border: transparent;
+  padding: 11px;
+}
+.input-group {
+  box-shadow: 0 0 0 0.15rem rgba(16, 45, 27, 0.15);
+}
+.input-group:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.05rem #d6dbd6;
+}
+
+/* Remove default bootstrap input border so group border is visible */
+.input-group .form-control {
+  border: none;
+  box-shadow: none;
+}
+
+.input-group .form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+::placeholder {
+  color: var(--placeholder-color) !important;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  font-family: var(--secondary-font-family);
+  line-height: 125%;
+}
+
+.input-group-text i {
+  color: #1f263e;
+}
+
+/*******************/
+@media screen and (min-width: 992px) {
+  .home-section header p {
+    width: 60%;
+  }
+
+  .home-section header h1,
+  .home-section header p {
+    text-align: left;
+  }
+
+  .button-container {
+    text-align: right;
+  }
+}
+
+.drop-down-toggler:hover {
+  cursor: pointer;
+  background-color: #b3d8b7;
+}
+
+.drop-down-toggler i.fa-angle-down {
+  color: var(--primary-color);
+  font-size: 12px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  text-decoration: none;
+  background-color: #ebedf3;
+  color: var(--primary-color) !important;
+}
+
+.dropdown-item {
+  color: var(--link-color);
+  font-family: var(--secondary-font-family);
+  cursor: pointer !important;
+}
+
+.modal-dialog-centered{
+  padding: 60px;
+}

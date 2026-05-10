@@ -1,6 +1,7 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+
   justify-content: center;
   align-items: center;
   background:
@@ -21,7 +22,6 @@
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 
 .spinner-border {
   width: 20px;
@@ -60,5 +60,4 @@
   .auth-card {
     max-width: 55%;
   }
-
 }

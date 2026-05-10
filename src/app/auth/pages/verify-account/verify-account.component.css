@@ -1,6 +1,7 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+
   justify-content: center;
   align-items: center;
   background:
@@ -27,11 +28,9 @@
   height: 20px;
 }
 
-
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {
   .auth-card {
     max-width: 55%;
   }
-
 }

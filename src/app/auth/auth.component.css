@@ -1,6 +1,7 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+
   justify-content: center;
   align-items: center;
   background:
@@ -154,7 +155,6 @@ header img {
   opacity: 0.7;
   transform: none;
 } */
-
 
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {

@@ -1,1 +1,49 @@
-<p>home works!</p>
+<section class="home-section pt-4 pt-lg-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-8">
+        <header class="ps-lg-5">
+          <h1 class="text-capitalize">
+            Welcome <span *ngIf="userData$ | async as user"> {{user.userName}} !</span>
+          </h1>
+          <p>
+            This is a welcoming screen for the entry of the application , you can now see the options
+          </p>
+        </header>
+      </div>
+      <div class="col-lg-4">
+        <div class="img-container">
+          <img src="../../../../assets/images/home-girl.png" alt="header-image" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="recipe-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <!---LEFT-->
+      <div class="col-lg-8">
+        <div class="ps-lg-5 recipe-heading">
+          <h2 class="text-capitalize" >
+            Fill the <span>Recipes</span> !
+          </h2>
+          <p class="mb-0">
+            you can now fill the meals easily using the table and form , click here and sill it with the table !
+          </p>
+        </div>
+      </div>
+      <!----RIGHT-->
+      <div class="col-lg-4">
+        <div class="button-container mt-4 mt-lg-1 w-100">
+           <button class="main-button" [routerLink]="recipeLink()">
+          Fill Recipes
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

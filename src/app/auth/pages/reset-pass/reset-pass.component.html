@@ -15,21 +15,22 @@
     </div>
     <!------------>
     <form class="w-100" [formGroup]="resetPassForm" (ngSubmit)="onVerify()">
-      <app-form-input [control]="getControl('email')" placeholder="Enter your Email" iconClass="fa-regular fa-envelope"/>
+      <app-form-input [control]="getControl('email')" placeholder="Enter your Email"
+        iconClass="fa-regular fa-envelope" />
 
       <!---Otp Code Start-->
-      <app-form-input [control]="getControl('seed')" placeholder="OTP" iconClass="fa-solid fa-lock"/>
+      <app-form-input [control]="getControl('seed')" placeholder="OTP" iconClass="fa-solid fa-lock" />
       <!---Otp Code End-->
 
       <!--Password start-->
       <app-form-input [control]="getControl('password')" placeholder="Enter Your Password" iconClass="fa-solid fa-lock"
         [patternErrorMessage]="'Password must be at least 6 characters long and has upper, lower, (#$@4)'"
-        [showToggle]="true"/>
+        [showToggle]="true" />
       <!--password end-->
       <!---Confirm Password Start-->
       <app-form-input [control]="getControl('confirmPassword')" placeholder="confirm Password"
         [formGroup]="resetPassForm" formErrorKey="PasswordNoMatch" formErrorMessage="Password doesn't match"
-        iconClass="fa-solid fa-lock" [showToggle]="true"/>
+        iconClass="fa-solid fa-lock" [showToggle]="true" />
 
       <!---Confirm Password End-->
       <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">

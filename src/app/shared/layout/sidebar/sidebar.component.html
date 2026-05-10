@@ -1,22 +1,38 @@
 <!-- Mobile overlay -->
-<div class="overlay" [class.show]="isMobileOpen && isMobile" (click)="isMobileOpen = false">
+<div class="overlay" [class.show]="isMobileOpen$ | async" (click)="navbarUiService.closeMobileMenu()">
 </div>
 
 <!-- Sidebar -->
-<aside class="sidebar" [class.collapsed]="isSidebarCollapsed && !isMobile"
-  [class.mobile-open]="isMobileOpen && isMobile">
+<aside class="sidebar" [class.collapsed]="(isSidebarCollapsed$ | async)" [class.mobile-open]="(isMobileOpen$ | async)">
 
+  <button class="btn toggle-btn" (click)="toggleSidebar()">
+    <i class="fa-solid fa-angle-right"></i>
+  </button>
   <div class="sidebar-logo">
-    <div class="logo-icon">A</div>
-    <span class="logo-text">AdminPanel</span>
+    <img src="../../../../assets/images/nav-logo.svg" alt="logo">
   </div>
 
-  <nav class="nav-section">
-    <p class="nav-label">Main</p>
-
-    <a class="nav-item" routerLink="." routerLinkActive="active">
-      <i class="nav-icon fa fa-home"></i>
-      <span class="nav-text">Dashboard</span>
-    </a>
+  <nav class="nav-section  d-flex flex-column h-100 justify-content-between">
+    <ul class="nav">
+      <ng-container *ngFor="let item of navMenu;let i = index;">
+        <li *ngIf="item.isActive">
+          <a class="nav-item" [routerLink]="item.routerNavigate" routerLinkActive="active"  [class.active]="isHomeActive(item)">
+            <i class="nav-icon me-2" [ngClass]="item.icon"></i>
+            <span class="nav-text text-capitalize">
+              {{ item.label }}
+            </span>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+    <!--Logout Button-->
+    <!-- <div class="nav-item py-1">
+      <button class="logout py-0" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket me-2"></i>
+        <span class="nav-text text-capitalize">
+          Logout
+        </span>
+      </button>
+    </div> -->
   </nav>
 </aside>

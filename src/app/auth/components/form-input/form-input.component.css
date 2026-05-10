@@ -65,7 +65,7 @@
 
 .input-group:focus-within {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+  box-shadow: 0 0 0 0.15rem rgba(13, 253, 105, 0.15);
 }
 
 /* Remove default bootstrap input border so group border is visible */
