@@ -10,12 +10,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './shared/layout/home/home.component';
 import { ConfirmDialogComponent } from './shared/ui/confirm-dialog/confirm-dialog.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxFileDropModule } from 'ngx-file-drop';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfirmDialogComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -23,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxFileDropModule,
    ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',

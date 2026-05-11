@@ -45,7 +45,7 @@
         <div class="w-100">
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i> </span>
-            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="onFilterChange()"
+            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="onSearchChange($event)"
               placeholder="Search Here with name .." aria-label="name" aria-describedby="basic-addon1">
           </div>
         </div>
@@ -59,7 +59,8 @@
 
       <div class="col-md-3 col-lg-2 mb-2">
         <ng-select [items]="categories" bindLabel="name" bindValue="id" placeholder="Select Category"
-          [(ngModel)]="selectedCategoryId" (ngModelChange)="onFilterChange()">
+          [(ngModel)]="selectedCategoryId" (ngModelChange)="onFilterChange()" [virtualScroll]="true"
+          [loading]="isCategoriesLoading" (scrollToEnd)="loadMoreCategories()">
         </ng-select>
       </div>
 
@@ -98,12 +99,11 @@
         <td> {{recipe?.name}}</td>
         <td class="d-flex justify-content-center">
           <div class="img-content ">
-            <img [src]="assetUrl + recipe?.imagePath" (error)="onImageError($event)"
-              [alt]="recipe?.name">
+            <img [src]="assetUrl + recipe?.imagePath" (error)="onImageError($event)" [alt]="recipe?.name">
           </div>
         </td>
         <td>{{recipe?.price}}</td>
-        <td>{{recipe?.description}}</td>
+        <td>{{(recipe?.description?.length ?? 0) > 80? (recipe?.description | slice:0:80) + '....': recipe?.description}}</td>
         <td>{{recipe?.tag?.name}}</td>
         <td>
           <div class="d-flex justify-content-center flex-wrap gap-2">
@@ -153,7 +153,7 @@
     </tbody>
   </table>
 
-  <pagination-controls class="my-pagination" id="recipes" (pageChange)="pageNumber = $event; loadRecipes()">
+  <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
+    (pageChange)="pageNumber = $event; loadRecipes()">
   </pagination-controls>
-
 </section>

@@ -53,7 +53,7 @@ body {
   width: 100%;
 }
 /*submit Button*/
-button[type="submit"] {
+.auth-card button[type="submit"] {
   font-family: var(--secondary-font-family);
   height: 48px;
   background-color: var(--primary-color);
@@ -94,11 +94,6 @@ button[type="submit"]:disabled {
   transform: none;
 }
 
-/* bs-dropdown-container {
-  .sidebar-dropdown {
-    transform: translateX(-120px) !important;
-  }
-} */
 
 .text-primary {
   color: var(--primary-color) !important;

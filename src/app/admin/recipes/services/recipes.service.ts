@@ -14,56 +14,28 @@ export class RecipesService {
   }
 
   getAllCategories(
-  pageSize: number = 10,
-  pageNumber: number = 1,
-  name?: string
-): Observable<any> {
+    pageSize: number = 10,
+    pageNumber: number = 1,
+    name?: string
+  ): Observable<any> {
 
-  let params: any = {
-    pageSize,
-    pageNumber
-  };
+    let params: any = {
+      pageSize,
+      pageNumber
+    };
 
-  if (name) {
-    params.name = name;
+    if (name) {
+      params.name = name;
+    }
+
+    return this.http.get('Category', { params });
   }
 
-  return this.http.get('Category', { params });
-}
-
   getRecipes(params: RecipeParams): Observable<any> {
-  return this.http.get('Recipe', {
-    params: { ...params }
-  });
-}
-
-  // getRecipes(
-  //   pageSize: number = 10,
-  //   pageNumber: number = 1,
-  //   name?: string,
-  //   tagId?: number,
-  //   categoryId?: number
-  // ): Observable<any> {
-
-  //   let params: any = {
-  //     pageSize,
-  //     pageNumber
-  //   };
-
-  //   if (name) {
-  //     params.name = name;
-  //   }
-
-  //   if (tagId) {
-  //     params.tagId = tagId;
-  //   }
-
-  //   if (categoryId) {
-  //     params.categoryId = categoryId;
-  //   }
-
-  //   return this.http.get('Recipe', { params });
-  // }
+    return this.http.get('Recipe', {
+      params: { ...params }
+    });
+  }
 
   getRecipeById(id: number): Observable<any> {
     return this.http.get(`Recipe/${id}`);

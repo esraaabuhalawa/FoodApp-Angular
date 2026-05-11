@@ -25,8 +25,6 @@ export class RegisterComponent implements OnInit {
   private formSub = new Subscription();
   errorMessage: string = '';
   isLoading: boolean = false;
-  // showPassword: boolean = false;
-  // showConfirmPassword: boolean = false;
   serverValidationErrors: any[] = [];
   // tel input values
   SearchCountryField = SearchCountryField;
@@ -83,14 +81,6 @@ export class RegisterComponent implements OnInit {
   getControl(controlName: string): FormControl {
     return this.registerForm.get(controlName) as FormControl;
   }
-
-  // togglePassword() {
-  //   this.showPassword = !this.showPassword;
-  // }
-
-  // toggleConfirmPassword() {
-  //   this.showConfirmPassword = !this.showConfirmPassword;
-  // }
 
   onRegister(): void {
     if (this.registerForm.invalid) {
