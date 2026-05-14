@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ recipe.name }}</h4>
+
+  <button type="button" class="cancel d-flex justify-content-center align-items-center text-danger border border-2 rounded-circle bg-transparent
+   border-danger" (click)="cancel()">
+    <i class="fa-solid fa-xmark text-danger fs-6"></i>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="recipe-view-card d-flex flex-column flex-lg-row gap-3 flex-wrap">
+
+    <div class="recipe-image">
+      <img [src]="assetUrl + recipe.imagePath" [alt]="recipe.name" (error)="onImageError($event)">
+    </div>
+
+    <div class="recipe-content">
+
+      <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+        <h3 class="recipe-title mb-0">{{ recipe.name }}</h3>
+
+        <span class="recipe-price">
+          {{ recipe.price }} EGP
+        </span>
+      </div>
+
+      <div class="info-item text-start" *ngIf="recipe.description">
+         <span class="label">Description:</span>
+      <p class="recipe-description">
+        {{ recipe.description }}
+      </p>
+      </div>
+
+      <div class="recipe-info">
+        <div class="info-item text-start">
+          <span class="label">Tag:</span>
+          <span class="value" *ngIf="recipe.tag">{{ recipe.tag.name }}</span>
+        </div>
+
+        <div class="info-item text-start">
+          <span class="label">Categories:</span>
+
+          <div class="d-flex flex-wrap gap-2 mt-1" *ngIf="recipe.category">
+            <span
+              class="category-badge"
+              *ngFor="let category of recipe.category"
+            >
+              {{ category.name }}
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3">
+          <div class="info-item">
+          <span class="label">Created:</span>
+          <span class="value">
+            {{ recipe.creationDate | date:'mediumDate' }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Updated:</span>
+          <span class="value">
+            {{ recipe.modificationDate | date:'mediumDate' }}
+          </span>
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer border-top-0">
+  <button type="button" class="btn btn-outline-danger text-capitalize px-3 fw-semibold fs-6" (click)="cancel()">
+    close
+  </button>
+</div>

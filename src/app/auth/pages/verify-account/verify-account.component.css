@@ -23,10 +23,6 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.spinner-border {
-  width: 20px;
-  height: 20px;
-}
 
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {

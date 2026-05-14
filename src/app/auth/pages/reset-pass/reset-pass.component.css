@@ -23,10 +23,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.spinner-border {
-  width: 20px;
-  height: 20px;
-}
+
 
 /****Image Upload File******/
 .img-preview {
@@ -39,20 +36,6 @@
   position: absolute;
   top: 0px;
   right: -15px;
-}
-::ng-deep .ngx-file-drop__drop-zone {
-  border: 2px dashed #ccc;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.3s;
-  overflow: hidden;
-  height: auto !important;
-}
-
-::ng-deep .ngx-file-drop__drop-zone {
-  border: 2px dotted #80be8b !important;
 }
 
 /*********** Responsive Styles * **********/

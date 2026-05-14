@@ -1,9 +1,16 @@
 .modal-body {
   text-align: center;
+  padding-bottom: 24px;
+  gap: 22px;
+}
+.modal-header{
+  padding-top: 41px;
 }
 
+
 .img-container {
-  width: 190px;
+  width: 287;
+  height: 274.6;
 }
 
 .img-container img {
@@ -12,7 +19,7 @@
   object-fit: contain;
 }
 
-strong {
+.title {
   font-size: 1.25rem;
   font-family: var(--secondary-font-family);
   margin-top: 20px;

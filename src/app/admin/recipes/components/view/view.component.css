@@ -1,0 +1,76 @@
+.modal-body {
+  text-align: center;
+  padding-bottom: 24px;
+  gap: 22px;
+}
+.modal-header{
+  padding-top: 41px;
+  padding-bottom: 20px;
+      justify-content: space-between;
+    border-bottom: 0;
+}
+.cancel{
+  width: 32px;
+  height: 32px;
+  transition: all .3s ease-in-out;
+}
+
+.cancel:hover{
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+.recipe-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.recipe-content {
+  flex: 1;
+  min-width: 250px;
+}
+
+.recipe-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.recipe-price {
+  background: var(--primary-color);
+  font-family: var(--poppins);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.recipe-description, .value {
+  color: #6c757d;
+}
+
+.recipe-description {
+  font-family: var(--poppins);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.recipe-info {
+  font-family: var(--poppins);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-item .label {
+  font-weight: 500;
+  font-family: var(--poppins);
+  margin-right: 8px;
+  color: var(--heading-color)
+}
+
+.category-badge {
+  background: #f1f3f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
