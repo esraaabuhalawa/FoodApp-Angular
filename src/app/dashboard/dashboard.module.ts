@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { SidebarComponent } from '../shared/layout/sidebar/sidebar.component';
-import { NavbarComponent } from '../shared/layout/navbar/navbar.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SidebarComponent } from '../shared/components/layout/sidebar/sidebar.component';
+import { NavbarComponent } from '../shared/components/layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [

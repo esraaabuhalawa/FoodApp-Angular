@@ -1,0 +1,82 @@
+.modal-title{
+  font-family: var(--secondary-font-family);
+  font-weight: 700;
+  font-size: 25px;
+  color: #494949;
+}
+
+.modal-header{
+  margin-top: 15px;
+  margin-bottom: 130px;
+}
+
+::placeholder {
+  color: var(--placeholder-color) !important;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  font-family: var(--secondary-font-family);
+  line-height: 125%;
+}
+.floating-group {
+  position: relative;
+}
+
+.floating-input {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  background-color: #f7f7f7 !important;
+  color: #1F263E;
+}
+
+.textarea-label,.price-label{
+  color: #1F263E!important;
+}
+.floating-input:not(textarea.floating-input) {
+  height: 40px;
+}
+
+/* label inside field */
+.floating-label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888f81;
+  pointer-events: none;
+  transition: 0.2s ease;
+  background: #f7f7f7;
+  padding: 0 5px;
+}
+
+.textarea-label {
+  top: 20%;
+}
+/* move label up on focus or when value exists */
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown) + .floating-label {
+  top: 0;
+  font-size: 12px;
+  color: #28a745;
+  transform: translateY(-50%);
+}
+
+input{
+  height: 50px;
+  border-radius: 8px;
+}
+
+.form-control:focus{
+  box-shadow: none;
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.modal-footer{
+  margin-top: 50px;
+  padding-top: 30px;
+}

@@ -15,17 +15,9 @@ export class GeneralInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token');
 
     let modifiedRequest = request.clone({
-      url: `${environment.apiUrl}${request.url}`
+      url: `${environment.apiUrl}${request.url}`,
+      setHeaders: token ? {Authorization: `Bearer ${token}`} : {}
     });
-
-    if (token) {
-      modifiedRequest = modifiedRequest.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    }
-
     return next.handle(modifiedRequest);
   }
 }

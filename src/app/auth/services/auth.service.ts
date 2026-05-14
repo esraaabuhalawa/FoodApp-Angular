@@ -15,45 +15,35 @@ export class AuthService {
   private http = inject(HttpClient)
   private router = inject(Router)
   private userData = new BehaviorSubject<any>(null);
-
-  private viewMode = new BehaviorSubject<roleEnum.SystemUser | roleEnum.SuperAdmin>(
-    (localStorage.getItem('viewMode') as roleEnum.SystemUser | roleEnum.SuperAdmin) || roleEnum.SystemUser
-  );
-
-  viewMode$ = this.viewMode.asObservable();
   userData$ = this.userData.asObservable();
 
-  onLogin(data: ILogin): Observable<any> {
-    return this.http.post('Users/Login', data).pipe(
-      tap((res: any) => {
-        //set Token in local storage
-        localStorage.setItem('token', res.token);
-        const userDecode = jwtDecode<IDecodedToken>(res.token);
-        this.userData.next(userDecode);
+  // onLogin(data: ILogin): Observable<any> {
+  //   return this.http.post('Users/Login', data).pipe(
+  //     tap((res: any) => {
+  //       //set Token in local storage
+  //       localStorage.setItem('token', res.token);
+  //       const userDecode = jwtDecode<IDecodedToken>(res.token);
+  //       this.userData.next(userDecode);
+  //       if(userDecode){
+  //         localStorage.setItem('role',userDecode.userGroup);
+  //       }
+  //     })
+  //   )
+  // }
 
-        // Set viewMode here — after we know the role
-        const isSuperAdmin = userDecode.userGroup === roleEnum.SuperAdmin;
-        const storedMode = localStorage.getItem('viewMode') as roleEnum.SystemUser | roleEnum.SuperAdmin;
-
-        // Only use stored if valid; otherwise default to their actual role
-        const initialMode = storedMode ?? (isSuperAdmin ? roleEnum.SuperAdmin : roleEnum.SystemUser);
-        this.setViewMode(initialMode);
-      })
-    )
+  onLogin(data: ILogin): Observable<any> { return this.http.post('Users/Login', data) }
+  getProfile() {
+    let token = localStorage.getItem('token');
+    if (token) {
+      let userDecode = jwtDecode<IDecodedToken>(token);
+      this.userData.next(userDecode);
+      localStorage.setItem('userRole', userDecode.userGroup);
+    }
   }
 
   //Get User Role
   getRole(): string | null {
-    return this.userData.value?.userGroup || null;
-  }
-
-  getViewMode() {
-    return this.viewMode.value;
-  }
-
-  setViewMode(mode: roleEnum.SystemUser | roleEnum.SuperAdmin) {
-    localStorage.setItem('viewMode', mode);
-    this.viewMode.next(mode);
+    return localStorage.getItem('userRole') || null;
   }
 
   //check if user is logged in
@@ -72,29 +62,28 @@ export class AuthService {
       }
       return isValid;
     } catch {
-      localStorage.removeItem('token'); // remove malformed token
+      localStorage.removeItem('token'); // remove  token
       return false;
     }
   }
 
   //on app reload
-  loadUserFromToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded: IDecodedToken = jwtDecode<IDecodedToken>(token);
-        this.userData.next(decoded);
-      } catch {
-        localStorage.removeItem('token');
-      }
-    }
-  }
+  // loadUserFromToken() {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     try {
+  //       const decoded: IDecodedToken = jwtDecode<IDecodedToken>(token);
+  //       this.userData.next(decoded);
+  //     } catch {
+  //       localStorage.removeItem('token');
+  //     }
+  //   }
+  // }
 
   // logout
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('viewMode')
+    localStorage.removeItem('userRole');
     this.userData.next(null);
     this.router.navigate(['/auth/login']);
   }

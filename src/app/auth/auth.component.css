@@ -135,11 +135,6 @@ header img {
   transition: all .3s ease;
 } */
 
-.spinner-border {
-  width: 20px;
-  height: 20px;
-}
-
 /* Hover state */
 /* button:hover {
   background-color: var(--primary-color);

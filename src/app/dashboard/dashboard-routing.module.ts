@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { roleGuard } from '../core/guards/role.guard';
-import { HomeComponent } from '../shared/layout/home/home.component';
-import { roleEnum } from '../core/enums/role.enum';
+import { adminGuard } from '../core/guards/admin.guard';
+import { userGuard } from '../core/guards/user.guard';
+import { HomeComponent } from '../shared/components/layout/home/home.component';
 
 const routes: Routes = [
   {
@@ -21,15 +21,13 @@ const routes: Routes = [
       },
       {
         path: 'admin',
-        data: { roles: [roleEnum.SuperAdmin] },
-        canActivate: [roleGuard],
+        canActivate: [adminGuard],
         loadChildren: () =>
           import('../admin/admin.module').then(m => m.AdminModule)
       },
       {
         path: 'userPortal',
-        data: { roles: [roleEnum.SystemUser, roleEnum.SuperAdmin] },
-        canActivate: [roleGuard],
+        canActivate: [userGuard],
         loadChildren: () =>
           import('../user-portal/user-portal.module').then(m => m.UserPortalModule)
       },

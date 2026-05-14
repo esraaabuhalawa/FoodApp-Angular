@@ -1,14 +1,17 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { RecipesService } from './services/recipes.service';
-import { Tag } from './models/tag';
-import { Category } from './models/category';
 import { Recipe, RecipeParams } from './models/recipe';
 import { environment } from 'src/environments/environment.development';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmDialogComponent } from 'src/app/shared/ui/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { Tag } from 'src/app/shared/service/tag/model/tag';
+import { Category } from 'src/app/shared/service/category/model/category';
+import { TagService } from 'src/app/shared/service/tag/tag.service';
+import { CategoryService } from 'src/app/shared/service/category/category.service';
+import { ViewComponent } from 'src/app/admin/recipes/components/view/view.component';
 
 @Component({
   selector: 'app-recipes',
@@ -20,6 +23,8 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 })
 export class RecipesComponent implements OnInit {
   private readonly recipesService = inject(RecipesService);
+  private readonly tagService = inject(TagService);
+  private readonly categoryService = inject(CategoryService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
 
@@ -39,14 +44,14 @@ export class RecipesComponent implements OnInit {
   selectedTagId?: number;
   selectedCategoryId?: number;
 
-  // pagination
+  // pagination for recipes
   pageSize: number = 10;
   pageNumber: number = 1;
   total!: number;
 
   //get tags
   getTags(): void {
-    this.recipesService.getAllTags().subscribe({
+    this.tagService.getAllTags().subscribe({
       next: (res) => {
         this.tags = res;
       },
@@ -69,14 +74,18 @@ export class RecipesComponent implements OnInit {
     }
 
     this.isCategoriesLoading = true;
-    this.recipesService.getAllCategories(
-      this.categoryPageSize,
-      this.categoryPageNumber
+    this.categoryService.getAllCategories(
+      {
+        pageNumber: this.categoryPageNumber,
+        pageSize: this.categoryPageSize,
+        name: this.name
+      }
+      //this.categoryPageSize, this.categoryPageNumber
+      //
     ).subscribe({
       next: (res) => {
         this.categories = [...this.categories, ...res.data];
-
-        // if API returned less than pageSize → no more data
+        // if API returned less than pageSize so no more data
         if (res.data.length < this.categoryPageSize) {
           this.hasMoreCategories = false;
         }
@@ -86,26 +95,15 @@ export class RecipesComponent implements OnInit {
         this.toastr.error('Failed to Load Categories', 'Error!');
         this.isCategoriesLoading = false;
       }
-
     });
-
   }
+
+  //categories pagination function
   loadMoreCategories(): void {
     if (this.isCategoriesLoading || !this.hasMoreCategories) { return; }
     this.categoryPageNumber++;
     this.getCategories();
   }
-  // getCategories(): void {
-  //   this.isCategoriesLoading = true
-  //   this.recipesService.getAllCategories().subscribe({
-  //     next: (res) => {
-  //       this.categories = res.data;
-  //     },
-  //     error: (err) => {
-  //       this.toastr.error('Failed to Load Categories', 'Error!');
-  //     }
-  //   });
-  // }
 
   //image Error
   onImageError(event: Event): void {
@@ -137,6 +135,7 @@ export class RecipesComponent implements OnInit {
       }
     });
   }
+
   //Search by name
   searchSubject: Subject<string> = new Subject();
   onSearchChange(value: string): void {
@@ -155,52 +154,48 @@ export class RecipesComponent implements OnInit {
     this.loadRecipes();
   }
 
-  onView(recipe: any): void {
-    console.log('View', recipe);
-    // navigate or open modal
+  onView(recipe: Recipe): void {
+    const initialState: ModalOptions = {
+      class: 'modal-lg modal-dialog-centered',
+      initialState: {
+        recipe: recipe
+      }
+    };
+    this.bsModalRef = this.modalService.show(ViewComponent, initialState);
   }
 
   //Delete modal
-  openDeleteModal(recipeId: number): void {
+  openDeleteModal(recipe: Recipe): void {
     this.bsModalRef = this.modalService.show(
+      //Sendin intial values to Confirm Bootstrap Modal
       ConfirmDialogComponent,
       {
         class: 'modal-lg modal-dialog-centered',
         initialState: {
-          title: 'Delete Recipe',
-          message: 'are you sure you want to delete this item ? if you are sure just click on delete it',
-          confirmCallback: () => {
-            this.deleteRecipe(recipeId);
-          }
+          title: recipe.name,
+          message: `Are you sure you want to delete <strong class="text-danger"> ${recipe.name} </strong> ? if you are sure just click on delete it`,
+          deleteURl: `Recipe/${recipe.id}`
         }
       }
     );
-  }
 
-  //Delete Recipe Function
-  deleteRecipe(id: number): void {
-    this.recipesService.deleteRecipe(id).subscribe({
-      next: (res) => {
-        this.toastr.success('Recipe deleted successfully', 'Success!');
-        this.loadRecipes()
-      },
-      error: (err) => {
-        this.toastr.error('Failed to delete', 'Error!');
+    //Reload Data After success Delete
+    this.bsModalRef?.onHidden?.subscribe((res: any) => {
+      if (res.deleted) {
+        this.loadRecipes();
       }
-    });
+    })
   }
-
 
   ngOnInit(): void {
-    //debounce time for search by name
+    // //debounce time for search by name
     this.searchSubject.pipe(
       debounceTime(500),
-      distinctUntilChanged()
     ).subscribe(() => {
       this.pageNumber = 1;
-      this.loadRecipes();
+      this.loadRecipes()
+    })
 
-    });
     this.loadRecipes();
     this.getTags();
     this.getCategories();

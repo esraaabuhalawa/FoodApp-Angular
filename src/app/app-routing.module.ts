@@ -12,7 +12,8 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [authGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-  }
+  },
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }
 ];
 
 @NgModule({

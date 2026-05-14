@@ -44,6 +44,8 @@ export class AuthComponent {
     this.formSub = this.authservice.onLogin(this.loginForm.value).subscribe({
       next: (res) => {
         this.errorMessage = '';
+        localStorage.setItem('token', res.token);
+        this.authservice.getProfile();
         this.toastr.success('You are Logged In Successfully', 'Success!');
         this.isLoading = false;
       },

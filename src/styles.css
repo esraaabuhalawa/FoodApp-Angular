@@ -3,11 +3,10 @@
 :root {
   --primary-color: #4aa35a;
   --secondary-color: #1f263e;
-  --nav-link: rgb(0, 146, 71);
+  --nav-link: #009247;
   --nav-active: rgba(0, 146, 71, 10%);
   --white-color: #fff;
-  --header-bg: #f2f3f6;
-  /* #f8f9fb; */
+  --header-bg: #f8f9fb;
   --placeholder-color: #8391a1;
   --paragraph-color: #49494999;
   --heading-color: #494949;
@@ -16,6 +15,7 @@
   --white-10: #dfe0e0;
   --font-family: "Roboto", sans-serif;
   --secondary-font-family: "Inter", sans-serif;
+  --poppins: "Poppins", sans-serif;
 }
 
 body {
@@ -65,25 +65,35 @@ body {
   transition: all 0.3s ease;
 }
 
-.main-button {
+.main-button,
+.add-button {
   font-family: var(--secondary-font-family);
   height: 48px;
-  background-color: var(--primary-color);
-  border-radius: 8px;
-  padding: 8px 30px;
   color: var(--white-color);
   font-weight: 700;
   font-size: 1rem;
-  border: 1px solid var(--primary-color);
   transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.main-button {
+  background-color: var(--primary-color);
+  padding: 8px 30px;
+  border: 1px solid var(--primary-color);
 }
 
+.add-button {
+  background-color: var(--nav-link);
+  padding: 0 50px;
+  border: 1px solid var(--nav-link);
+}
 /* Hover state */
 .main-button:hover,
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+.add-button:hover {
   background-color: var(--primary-color);
   transform: translateY(-1px);
-  opacity: 0.9;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 /* Disabled state */
@@ -93,7 +103,6 @@ button[type="submit"]:disabled {
   opacity: 0.7;
   transform: none;
 }
-
 
 .text-primary {
   color: var(--primary-color) !important;
@@ -111,7 +120,23 @@ button[type="submit"]:disabled {
   color: #43601b !important;
   scale: 1.05;
 }
+.spinner-border {
+  width: 20px !important;
+  height: 20px !important;
+}
+.cancel{
+  width: 32px;
+  height: 32px;
+}
+p{
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
 /**********paginataion Styling***************/
+.ng-select.ng-select-opened.ng-select-bottom > .ng-select-container {
+  background-color: #f7f7f7 !important;
+}
 /* Pagination Container */
 .ngx-pagination {
   display: flex !important;
@@ -169,6 +194,14 @@ button[type="submit"]:disabled {
   border: 1px solid var(--primary-color) !important;
 }
 
+.ngx-pagination li {
+  font-family: var(--poppins);
+  color: #3d4359;
+}
+.ngx-pagination a,
+.ngx-pagination button {
+  border-radius: 5px !important;
+}
 /* Prev & Next buttons */
 .ngx-pagination .pagination-previous a,
 .ngx-pagination .pagination-next a {
@@ -190,4 +223,13 @@ button[type="submit"]:disabled {
 
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-striped-bg: #fff;
+  background: #fff !important;
+}
+.table-striped > tbody > tr:nth-of-type(even) > * {
+  --bs-table-striped-bg: #f8f9fb;
+  background-color: #f8f9fb !important;
 }
