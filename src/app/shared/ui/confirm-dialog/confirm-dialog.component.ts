@@ -22,12 +22,12 @@ export class ConfirmDialogComponent {
     this.http.delete(this.deleteURl).subscribe({
       next: (res) => {
         this.toaster.success(`${this.title} is deleted successfully`, 'Success!');
-        this.bsModalRef.hide();
         this.bsModalRef.onHidden?.emit({ deleted: true }); // to notify parent that the item is deleted to reload data
+        this.cancel();
       },
       error: (err) => {
         this.toaster.error('Failed to delete', 'Error!');
-        this.bsModalRef.hide();
+        this.cancel()
       }
     });
   }

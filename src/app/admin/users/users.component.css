@@ -106,40 +106,19 @@ table .img-content img {
 }
 
 /********Search styling***************/
-.input-group .form-control,
-.input-group,
-.input-group-text {
-  height: 40px;
+label,select{
+  font-family: var(--poppins);
 }
-
-.input-group {
-  border-radius: 8px;
-  background-color: var(--white-color);
+label{
+  font-size: 16px;
+  color: var(--secondary-color);
 }
-
-.input-group-text {
-  border-radius: 8px;
-  background: #fff;
-  border: transparent;
-  padding: 11px;
+select,select option{
+  cursor: pointer;
+  font-size: .875rem;
 }
-.input-group {
-  box-shadow: 0 0 0 0.15rem rgba(16, 45, 27, 0.15);
-}
-.input-group:focus-within {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.05rem #d6dbd6;
-}
-
-/* Remove default bootstrap input border so group border is visible */
-.input-group .form-control {
-  border: none;
-  box-shadow: none;
-}
-
-.input-group .form-control:focus {
-  outline: none;
-  box-shadow: none;
+.form-control {
+  height: 35px;
 }
 
 ::placeholder {
@@ -148,10 +127,6 @@ table .img-content img {
   font-size: 0.9375rem;
   font-family: var(--secondary-font-family);
   line-height: 125%;
-}
-
-.input-group-text i {
-  color: #1f263e;
 }
 
 /*******************/

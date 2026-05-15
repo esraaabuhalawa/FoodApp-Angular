@@ -3,11 +3,12 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, debounceTime } from 'rxjs';
-import { CategoryService } from 'src/app/shared/service/category/category.service';
-import { Category } from 'src/app/shared/service/category/model/category';
 import { ConfirmDialogComponent } from 'src/app/shared/ui/confirm-dialog/confirm-dialog.component';
 import { environment } from 'src/environments/environment.development';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
+import { CategoryService } from './services/category.service';
+import { Category } from '../services/models/category';
+import { GeneralService } from '../services/general.service';
 
 @Component({
   selector: 'app-categories',
@@ -21,7 +22,7 @@ export class CategoriesComponent {
   private readonly categoryService = inject(CategoryService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
-
+  private readonly generalService = inject(GeneralService);
   //bootstrap model
   private readonly modalService = inject(BsModalService);
   bsModalRef?: BsModalRef;
@@ -52,7 +53,7 @@ export class CategoriesComponent {
       pageNumber: this.pageNumber,
       name: this.name || '',
     };
-    this.categoryService.getAllCategories(params).subscribe({
+    this.generalService.getAllCategories(params).subscribe({
       next: (res) => {
         this.categories = res.data;
         this.isLoading = false;

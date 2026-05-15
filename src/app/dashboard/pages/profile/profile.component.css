@@ -1,0 +1,123 @@
+/****Form Styling******************/
+h1{
+  font-family: var(--secondary-font-family);
+  line-height: normal;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin-bottom: 8px;
+}
+
+form {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.buttons-container {
+  margin-top: 30px;
+  padding-top: 40px;
+  border-top: 3px solid #f7f7f7;
+}
+.input-group-text {
+  border: none;
+  background: #f7f7f7;
+}
+.error-msg {
+  font-size: 14px;
+}
+
+/*******Input Floating label Effect************/
+.floating-group {
+  position: relative;
+}
+
+.floating-input {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  background-color: #f7f7f7 !important;
+  color: #1F263E;
+}
+
+.textarea-label,.price-label{
+  color: #1F263E!important;
+}
+.floating-input:not(textarea.floating-input) {
+  height: 40px;
+}
+
+/* label inside field */
+.floating-label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888f81;
+  pointer-events: none;
+  transition: 0.2s ease;
+  background: #f7f7f7;
+  padding: 0 5px;
+}
+
+.textarea-label {
+  top: 20%;
+}
+/* move label up on focus or when value exists */
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown) + .floating-label {
+  top: 0;
+  font-size: 12px;
+  color: #28a745;
+  transform: translateY(-50%);
+}
+
+input[type="number"] {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/*select */
+::ng-deep .ng-select .ng-placeholder {
+  color: #342e2e !important;
+}
+
+::ng-deep .iti--allow-dropdown input.iti__tel-input,
+::ng-deep .iti--allow-dropdown input.iti__tel-input[type="text"],
+::ng-deep .iti--allow-dropdown input.iti__tel-input[type="tel"],
+::ng-deep .iti--show-selected-dial-code input.iti__tel-input,
+::ng-deep .iti--show-selected-dial-code input.iti__tel-input[type="text"],
+::ng-deep .iti--show-selected-dial-code input.iti__tel-input[type="tel"]{
+  border:1px solid #ddd !important;
+  height: 45px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #6c757d;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+}
+
+.password-toggle-btn i {
+  font-size: 15px;
+}

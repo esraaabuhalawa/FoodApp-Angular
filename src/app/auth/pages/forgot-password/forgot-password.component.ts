@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,12 +10,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent{
   forgotPassForm!: FormGroup
   constructor(private fb: FormBuilder, private authservice: AuthService,
     private toastr: ToastrService,
     private router: Router
-  ) { }
+  ) { this.formInit()}
   private formSub = new Subscription();
   errorMessage: string = '';
   isLoading: boolean = false;
@@ -57,7 +57,4 @@ export class ForgotPasswordComponent implements OnInit {
     return this.forgotPassForm.get(controlName) as FormControl
   }
 
-  ngOnInit(): void {
-    this.formInit();
-  }
 }

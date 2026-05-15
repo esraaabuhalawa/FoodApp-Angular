@@ -1,3 +1,4 @@
+import { roleEnum } from './../../core/enums/role.enum';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { UsersService } from './services/users.service';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
@@ -5,10 +6,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject, debounceTime } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/ui/confirm-dialog/confirm-dialog.component';
 import { environment } from 'src/environments/environment.development';
-import { ViewComponent } from '../recipes/components/view/view.component';
-import { User } from './services/model/user';
+import { Group, User } from './services/model/user';
 import { UserParams } from './services/model/user-params';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { ViewComponent } from './components/view/view.component';
+import { CurrentUser } from 'src/app/auth/models/currentUser';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -20,6 +23,7 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 })
 export class UsersComponent {
   private readonly usersService = inject(UsersService);
+  private readonly authService = inject(AuthService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
 
@@ -31,18 +35,35 @@ export class UsersComponent {
   users: User[] = []
   isLoading: boolean = false;
   assetUrl = environment.assestUrl
-
+  currentUser!: CurrentUser;
   // filters
+  searhType: string = '1'
   name: string = '';
   email: string = '';
   country: string = '';
-  group: number[] = [];
-
+  //group: number[] = [];
+  group: number | null = null;
+  role!: roleEnum
   // pagination for users
   pageSize: number = 10;
   pageNumber: number = 1;
   total!: number;
 
+  groups = [
+    {
+      id: 1,
+      userRole: "Admin"
+    },
+    {
+      id: 2,
+      userRole: "User"
+    }
+  ];
+
+  //Set User Role
+  userRole(userGrop: Group) {
+    return userGrop?.name === roleEnum.SuperAdmin ? 'Admin' : 'User'
+  }
   //image Error
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
@@ -56,7 +77,7 @@ export class UsersComponent {
       userName: this.name,
       email: this.email,
       country: this.country,
-      groups: this.group,
+      groups: this.group ? [this.group] : [],
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
     };
@@ -65,7 +86,7 @@ export class UsersComponent {
       next: (res) => {
         this.users = res.data;
         this.isLoading = false;
-        console.log(res)
+        // console.log(res)
         this.total = res.totalNumberOfRecords
         this.cdr.detectChanges();
       },
@@ -98,7 +119,8 @@ export class UsersComponent {
     const initialState: ModalOptions = {
       class: 'modal-lg modal-dialog-centered',
       initialState: {
-        user: user
+        user: user,
+        currentUser: this.currentUser
       }
     };
     this.bsModalRef = this.modalService.show(ViewComponent, initialState);
@@ -127,15 +149,26 @@ export class UsersComponent {
     })
   }
 
+  //get Currect User Data
+  getUserData() {
+    this.authService.getCurrentUserData().subscribe({
+      next: (res: CurrentUser) => {
+        this.currentUser = res
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
+
   ngOnInit(): void {
-    // //debounce time for search by name
-    this.searchSubject.pipe(
-      debounceTime(500),
-    ).subscribe(() => {
+    //debounce time for search by name
+    this.searchSubject.pipe(debounceTime(500),).subscribe(() => {
       this.pageNumber = 1;
       this.loadUsers()
     })
 
+    this.getUserData();
     this.loadUsers();
   }
 }

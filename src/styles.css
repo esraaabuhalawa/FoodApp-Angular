@@ -124,14 +124,21 @@ button[type="submit"]:disabled {
   width: 20px !important;
   height: 20px !important;
 }
-.cancel{
+.cancel {
   width: 32px;
   height: 32px;
 }
-p{
+p {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+}
+/*******form Control Styling***************/
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: var(--primary-color);
 }
 /**********paginataion Styling***************/
 .ng-select.ng-select-opened.ng-select-bottom > .ng-select-container {
@@ -232,4 +239,35 @@ p{
 .table-striped > tbody > tr:nth-of-type(even) > * {
   --bs-table-striped-bg: #f8f9fb;
   background-color: #f8f9fb !important;
+}
+
+/******Ng Select Styling*************/
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
+  background-color: #16ed7e26;
+  margin-bottom: 2px;
+}
+
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value
+  .ng-value-icon.left {
+  color: var(--heading-color);
+  border-right: 1px solid #ceffb8;
+}
+
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  color: var(--heading-color);
+  background-color: #16ed7e26;
+}
+
+.ng-select.ng-select-focused .ng-select-container {
+  border-color: var(--primary-color) !important;
+  box-shadow: none !important;
 }

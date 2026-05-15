@@ -70,11 +70,6 @@ input{
   border-radius: 8px;
 }
 
-.form-control:focus{
-  box-shadow: none;
-  outline: none;
-  border-color: var(--primary-color);
-}
 
 .modal-footer{
   margin-top: 50px;

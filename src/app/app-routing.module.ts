@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { loggedGuard } from './core/guards/logged.guard';
+import { ErrorComponent } from './core/pages/error/error.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
-  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
+  {path: '**' , component:ErrorComponent}
 ];
 
 @NgModule({

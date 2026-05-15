@@ -2,11 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-interface categoryParams {
-  name?: string;
-  pageSize: number;
-  pageNumber: number;
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -14,9 +9,9 @@ export class CategoryService {
 
   private readonly http = inject(HttpClient)
 
-  getAllCategories(params: categoryParams): Observable<any> {
-    return this.http.get('Category', { params: { ...params } });
-  }
+  // getAllCategories(params: categoryParams): Observable<any> {
+  //   return this.http.get('Category', { params: { ...params } });
+  // }
 
   getCategoryById(id: number): Observable<any> {
     return this.http.get(`Category/${id}`);

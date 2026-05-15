@@ -11,3 +11,11 @@ export const confirmPasswordValidator: ValidatorFn = (
     ? null
     : { PasswordNoMatch: true };
 };
+
+export const confirmChangePasswordValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  return control.value.newPassword === control.value.confirmNewPassword
+    ? null
+    : { PasswordNoMatch: true };
+};

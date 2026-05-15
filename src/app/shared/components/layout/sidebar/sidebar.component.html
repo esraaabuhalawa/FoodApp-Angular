@@ -3,8 +3,8 @@
 </div>
 
 <!-- Sidebar -->
-<aside class="sidebar" [class.collapsed]="(isSidebarCollapsed$ | async)" [class.mobile-open]="(isMobileOpen$ | async)">
-
+<aside class="sidebar"  [class.collapsed]="(isSidebarCollapsed$ | async)" [class.mobile-open]="(isMobileOpen$ | async)">
+<!--(mouseenter)="toggleSidebar()"-->
   <button class="btn toggle-btn" (click)="toggleSidebar()">
     <i class="fa-solid fa-angle-right"></i>
   </button>

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { CategoryService } from 'src/app/shared/service/category/category.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-add-edit',

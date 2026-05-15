@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./verify-account.component.css']
 })
 
-export class VerifyAccountComponent implements OnInit {
+export class VerifyAccountComponent{
   verifyForm!: FormGroup
   constructor(
     private fb: FormBuilder,
@@ -61,9 +61,5 @@ export class VerifyAccountComponent implements OnInit {
 
   getControl(controlName: string): FormControl {
     return this.verifyForm.get(controlName) as FormControl
-  }
-
-  ngOnInit(): void {
-    //this.formInit();
   }
 }

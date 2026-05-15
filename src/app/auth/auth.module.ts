@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { AuthHeaderComponent } from './components/auth-header/auth-header.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AuthHeaderComponent } from './components/auth-header/auth-header.compon
     ForgotPasswordComponent,
     ResetPassComponent,
     FormInputComponent,
-    AuthHeaderComponent
+    AuthHeaderComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
