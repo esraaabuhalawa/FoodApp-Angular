@@ -12,12 +12,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { HomeComponent } from './shared/components/layout/home/home.component';
 import { ViewComponent } from './admin/recipes/components/view/view.component';
+import { ErrorComponent } from './core/pages/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfirmDialogComponent,
     ViewComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

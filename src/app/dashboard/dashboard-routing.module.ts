@@ -4,6 +4,8 @@ import { DashboardComponent } from './dashboard.component';
 import { adminGuard } from '../core/guards/admin.guard';
 import { userGuard } from '../core/guards/user.guard';
 import { HomeComponent } from '../shared/components/layout/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { CreateAdminComponent } from './pages/create-admin/create-admin.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,14 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'create-admin',
+        component: CreateAdminComponent
       },
       {
         path: 'admin',

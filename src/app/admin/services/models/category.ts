@@ -4,3 +4,9 @@ export interface Category {
   creationDate: string;
   modificationDate: string;
 }
+
+export interface categoryParams {
+  name?: string;
+  pageSize: number;
+  pageNumber: number;
+}

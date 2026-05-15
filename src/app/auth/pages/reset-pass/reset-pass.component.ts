@@ -21,8 +21,6 @@ export class ResetPassComponent {
   }
 
   private formSub = new Subscription();
-  // showPassword: boolean = false;
-  // showConfirmPassword: boolean = false;
   serverValidationErrors: any[] = [];
   errorMessage: string = '';
   isLoading: boolean = false;
@@ -37,14 +35,6 @@ export class ResetPassComponent {
       validators: confirmPasswordValidator
     })
   }
-
-  // togglePassword() {
-  //   this.showPassword = !this.showPassword;
-  // }
-
-  // toggleConfirmPassword() {
-  //   this.showConfirmPassword = !this.showConfirmPassword;
-  // }
 
   onVerify(): void {
     if (this.resetPassForm.invalid) {
@@ -76,9 +66,5 @@ export class ResetPassComponent {
 
   getControl(controlName: string): FormControl {
     return this.resetPassForm.get(controlName) as FormControl
-  }
-
-  ngOnInit(): void {
-   // this.formInit();
   }
 }

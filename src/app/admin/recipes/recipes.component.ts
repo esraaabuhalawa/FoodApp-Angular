@@ -6,12 +6,11 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmDialogComponent } from 'src/app/shared/ui/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { Tag } from 'src/app/shared/service/tag/model/tag';
-import { Category } from 'src/app/shared/service/category/model/category';
-import { TagService } from 'src/app/shared/service/tag/tag.service';
-import { CategoryService } from 'src/app/shared/service/category/category.service';
+import { debounceTime, Subject } from 'rxjs';
 import { ViewComponent } from 'src/app/admin/recipes/components/view/view.component';
+import { GeneralService } from '../services/general.service';
+import { Category } from '../services/models/category';
+import { Tag } from '../services/models/tag';
 
 @Component({
   selector: 'app-recipes',
@@ -23,8 +22,7 @@ import { ViewComponent } from 'src/app/admin/recipes/components/view/view.compon
 })
 export class RecipesComponent implements OnInit {
   private readonly recipesService = inject(RecipesService);
-  private readonly tagService = inject(TagService);
-  private readonly categoryService = inject(CategoryService);
+  private readonly generalService = inject(GeneralService)
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
 
@@ -51,7 +49,7 @@ export class RecipesComponent implements OnInit {
 
   //get tags
   getTags(): void {
-    this.tagService.getAllTags().subscribe({
+    this.generalService.getAllTags().subscribe({
       next: (res) => {
         this.tags = res;
       },
@@ -74,7 +72,7 @@ export class RecipesComponent implements OnInit {
     }
 
     this.isCategoriesLoading = true;
-    this.categoryService.getAllCategories(
+    this.generalService.getAllCategories(
       {
         pageNumber: this.categoryPageNumber,
         pageSize: this.categoryPageSize,

@@ -1,5 +1,6 @@
-import { Category } from "src/app/shared/service/category/model/category";
-import { Tag } from "src/app/shared/service/tag/model/tag";
+import { Category } from "../../services/models/category";
+import { Tag } from "../../services/models/tag";
+
 
 export interface RecipeParams {
   name?: string;

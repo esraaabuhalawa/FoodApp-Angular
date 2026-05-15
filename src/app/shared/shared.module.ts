@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { EmptyStateComponent } from './ui/empty-state/empty-state.component';
 import { LoaderComponent } from './ui/loader/loader.component';
 import { PagesHeaderComponent } from './ui/pages-header/pages-header.component';
@@ -9,7 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 @NgModule({
   declarations: [
     LoaderComponent,
@@ -18,15 +18,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FileDropComponent
   ],
   imports: [
+    DatePipe,
     CommonModule,
     NgxFileDropModule,
     NgxPaginationModule,
     NgSelectModule,
-      FormsModule,
-      BsDropdownModule.forRoot(),
-      ReactiveFormsModule
+    FormsModule,
+    BsDropdownModule.forRoot(),
+    ReactiveFormsModule,
+    NgxIntlTelInputModule
     // NgSelectModule,
-    // ReactiveFormsModule
   ],
   exports: [
     LoaderComponent,
@@ -35,9 +36,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FileDropComponent,
     NgSelectModule,
     NgxPaginationModule,
-      FormsModule,
-      BsDropdownModule,
-      ReactiveFormsModule
+    FormsModule,
+    BsDropdownModule,
+    ReactiveFormsModule,
+    DatePipe,
+    NgxIntlTelInputModule
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 <header class="app-header">
-  <div class="w-50">
+  <div class="search-bar">
     <div class="input-group">
       <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i> </span>
       <input type="text" class="form-control" placeholder="Search Here .." aria-label="Username"
@@ -15,26 +15,25 @@
         <!-- Trigger -->
         <div class="user-row drop-down-toggler" dropdownToggle>
           <div class="avatar-img d-flex justify-content-center align-items-center" *ngIf="currentUser.imagePath">
-            <img [src]="assetUrl + currentUser.imagePath" [alt]="currentUser.userName">
+            <img [src]="assetUrl + currentUser.imagePath" (error)="onImageError($event)" [alt]="currentUser.userName">
           </div>
           <div class="avatar d-flex justify-content-center align-items-center" *ngIf="!currentUser.imagePath">{{
             currentUser.userName.slice(0,2).toUpperCase() }}</div>
           <div class="user-info">
             <p class="user-name">{{ currentUser.userName }}</p>
-            <!-- <p class="user-role">{{ currentUser.group.name }}</p> -->
           </div>
           <i class="fa-solid fa-angle-down"></i>
         </div>
 
         <!-- Menu -->
-        <ul *dropdownMenu class="dropdown-menu sidebar-dropdown" role="menu"
-          style="left: auto; right: -70px;top:60px;height: fit-content;" role="menu">
+        <ul *dropdownMenu class="dropdown-menu sidebar-dropdown"  role="menu"
+          style="left: auto; right: -70px;top:60px;;" role="menu"> <!--[ngClass]="isSuperAdmin ? 'menu-super' : 'menu-regular'"-->
 
           <!-- Header -->
           <li class="dropdown-header">
             <div class="d-flex align-items-center gap-2">
               <div class="avatar-img avatar-img-1 d-flex justify-content-center align-items-center" *ngIf="currentUser.imagePath">
-                <img [src]="assetUrl + currentUser.imagePath" [alt]="currentUser.userName">
+                <img [src]="assetUrl + currentUser.imagePath" (error)="onImageError($event)" [alt]="currentUser.userName">
               </div>
               <div class="avatar avatar-sm d-flex justify-content-center align-items-center"
                 *ngIf="!currentUser.imagePath">{{ currentUser.userName.slice(0,2).toUpperCase() }}</div>
@@ -49,12 +48,17 @@
           <li class="divider dropdown-divider"></li>
 
           <li role="menuitem">
-            <a class="dropdown-item" routerLink="/dashboard/profile">
+            <a class="dropdown-item" routerLink="/dashboard/profile" [routerLinkActive]="'active'">
               <i class="bi bi-person me-2"></i> Profile
             </a>
           </li>
+          <!-- <li role="menuitem" *ngIf="isSuperAdmin">
+            <a class="dropdown-item" routerLink="/dashboard/create-admin">
+              <i class="bi bi-key me-2"></i> Create Admin
+            </a>
+          </li> -->
           <li role="menuitem">
-            <a class="dropdown-item" routerLink="/dashboard/change-password">
+            <a class="dropdown-item" (click)="changePassword()">
               <i class="bi bi-key me-2"></i> Change Password
             </a>
           </li>

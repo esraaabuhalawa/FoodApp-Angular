@@ -1,8 +1,11 @@
 <div class="modal-header border-bottom-0 d-flex justify-content-between align-items-center">
-    <h4 class="modal-title">
+    <h4 class="modal-title" *ngIf="!isViewMode">
       {{ isEditMode ? 'Edit Category' : 'Add Category' }}
     </h4>
 
+    <h4 class="modal-title" *ngIf="isViewMode">
+      Category Data
+    </h4>
     <button type="button" class="cancel d-flex justify-content-center align-items-center text-danger border border-2 rounded-circle bg-transparent
         border-danger" (click)="cancel()">
     <i class="fa-solid fa-xmark text-danger fs-6"></i>

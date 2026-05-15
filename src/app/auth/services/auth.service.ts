@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 import { IChangePassword, ILogin, IVerify, ResetPasswordData } from '../models/auth';
 import { jwtDecode } from 'jwt-decode';
 import { IDecodedToken } from '../models/idecoded-token';
 import { Router } from '@angular/router';
-import { roleEnum } from 'src/app/core/enums/role.enum';
 import { CurrentUser } from '../models/currentUser';
 
 @Injectable({
@@ -67,18 +66,6 @@ export class AuthService {
     }
   }
 
-  //on app reload
-  // loadUserFromToken() {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     try {
-  //       const decoded: IDecodedToken = jwtDecode<IDecodedToken>(token);
-  //       this.userData.next(decoded);
-  //     } catch {
-  //       localStorage.removeItem('token');
-  //     }
-  //   }
-  // }
 
   // logout
   logout() {
@@ -104,11 +91,22 @@ export class AuthService {
     return this.http.post('Users/Reset', data);
   }
 
-  getCurrentUserData(): Observable<CurrentUser> {
+  onChangePassword(data: IChangePassword): Observable<any> {
+    return this.http.put('Users/ChangePassword', data);
+  }
+
+  //get Current User
+   getCurrentUserData(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>('Users/currentUser');
   }
 
-  onChangePassword(data: IChangePassword): Observable<any> {
-    return this.http.put('Users/ChangePassword', data);
+  //update current User
+  updateCurrentUserData(data:FormData): Observable<any> {
+    return this.http.put<any>('Users', data);
+  }
+
+  //Create Admin
+  createAdmin(data:FormData): Observable<any> {
+    return this.http.put<any>('Users/Create', data);
   }
 }

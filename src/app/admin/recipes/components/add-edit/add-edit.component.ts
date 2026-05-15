@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { CategoryService } from 'src/app/shared/service/category/category.service';
-import { Category } from 'src/app/shared/service/category/model/category';
 import { FileUtilServiceService } from 'src/app/shared/service/file-util-service.service';
-import { Tag } from 'src/app/shared/service/tag/model/tag';
-import { TagService } from 'src/app/shared/service/tag/tag.service';
 import { environment } from 'src/environments/environment.development';
 import { Recipe } from '../../models/recipe';
 import { RecipesService } from '../../services/recipes.service';
+import { GeneralService } from 'src/app/admin/services/general.service';
+import { Category } from 'src/app/admin/services/models/category';
+import { Tag } from 'src/app/admin/services/models/tag';
 
 @Component({
   selector: 'app-add-edit',
@@ -19,8 +18,8 @@ import { RecipesService } from '../../services/recipes.service';
 })
 export class AddEditComponent {
  private readonly recipesService = inject(RecipesService);
-  private readonly tagService = inject(TagService);
-  private readonly categoryService = inject(CategoryService);
+  private readonly generalService = inject(GeneralService);
+
   private readonly toastr = inject(ToastrService);
   private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
@@ -60,11 +59,9 @@ export class AddEditComponent {
   isCategoriesLoading: boolean = false;
 
   getCategories(): void {
-    if (!this.hasMoreCategories || this.isCategoriesLoading) {
-      return;
-    }
+    if (!this.hasMoreCategories || this.isCategoriesLoading) { return;}
     this.isCategoriesLoading = true;
-    this.categoryService.getAllCategories(
+    this.generalService.getAllCategories(
       {
         pageNumber: this.categoryPageNumber,
         pageSize: this.categoryPageSize,
@@ -172,7 +169,7 @@ export class AddEditComponent {
 
   //Get Tags
   getTags(): void {
-    this.tagService.getAllTags().subscribe({
+    this.generalService.getAllTags().subscribe({
       next: (res) => {
         this.tags = res;
       },

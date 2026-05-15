@@ -1,0 +1,100 @@
+<!-- modal-header -->
+<div class="modal-header mb-3">
+  <button type="button" class="cancel d-flex justify-content-center align-items-center text-danger border border-2 rounded-circle bg-transparent
+        border-danger" (click)="cancel()">
+    <i class="fa-solid fa-xmark text-danger fs-6"></i>
+  </button>
+</div>
+
+<!-- modal-body -->
+<div class="modal-body">
+  <div class="user-card">
+    <!-- Cover Banner -->
+    <div class="card-banner">
+      <span class="group-badge" *ngIf="user.group">
+        {{ user.group.name }}
+      </span>
+    </div>
+
+    <!-- Avatar + Status Row -->
+    <div class="avatar-row">
+      <div class="avatar-wrapper">
+        <img
+          [src]="assetUrl + user.imagePath"
+          [alt]="user.userName"
+          (error)="onImageError($event)"
+          class="avatar-img" />
+        <span class="avatar-fallback">
+          {{ user.userName }}
+        </span>
+      </div>
+
+      <span class="status-badge active" *ngIf="isActive">
+        <span class="status-dot"></span>
+        Active
+      </span>
+    </div>
+
+    <!-- Name & Email -->
+    <div class="card-identity">
+      <h3 class="user-name">{{ user.userName }}</h3>
+      <p class="user-email">{{ user.email }}</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Info Fields -->
+    <div class="info-list">
+
+      <div class="info-row">
+        <span class="info-icon">
+          <i class="fa-solid fa-location-dot"></i>
+        </span>
+        <div class="info-text">
+          <span class="info-label">Country</span>
+          <span class="info-value">{{ user.country }}</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="info-icon">
+          <i class="fa-solid fa-phone"></i>
+        </span>
+        <div class="info-text">
+          <span class="info-label">Phone</span>
+          <span class="info-value">{{ user.phoneNumber }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Dates Row -->
+    <div class="dates-row d-flex flex-wrap gap-2 justify-content-between align-items-center">
+      <div class="date-item">
+        <i class="fa-regular fa-calendar-plus date-icon"></i>
+        <div class="info-text">
+          <span class="info-label">Created</span>
+          <span class="info-value">{{ user.creationDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+
+      <div class="date-item">
+        <i class="fa-regular fa-calendar-check date-icon"></i>
+        <div class="info-text">
+          <span class="info-label">Updated</span>
+          <span class="info-value">{{ user.modificationDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</div>
+
+
+<div class="modal-footer border-top-0">
+  <button type="button" class="btn btn-outline-danger text-capitalize px-3 fw-semibold fs-6" (click)="cancel()">
+    close
+  </button>
+</div>

@@ -16,17 +16,16 @@
 .auth-card {
   width: 100%;
   max-width: 80%;
-  padding: 5rem 4.375rem;
+  padding: 1rem 2rem;
   border-radius: 16px;
   background: var(--white-color);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-
 /*********** Responsive Styles * **********/
 @media screen and (min-width: 1200px) {
   .auth-card {
-    max-width: 55%;
+    max-width: 40%;
   }
 }
