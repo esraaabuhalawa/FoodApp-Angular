@@ -1,8 +1,8 @@
-<header class="app-header">
+<header class="app-header d-flex flex-wrap justify-content-between gap-2 flex-sm-nowrap">
   <div class="search-bar">
     <div class="input-group">
       <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i> </span>
-      <input type="text" class="form-control" placeholder="Search Here .." aria-label="Username"
+      <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="($event)" placeholder="Search Here by Recipe Name .." aria-label="Username"
         aria-describedby="basic-addon1">
     </div>
   </div>
@@ -19,6 +19,7 @@
           </div>
           <div class="avatar d-flex justify-content-center align-items-center" *ngIf="!currentUser.imagePath">{{
             currentUser.userName.slice(0,2).toUpperCase() }}</div>
+          
           <div class="user-info">
             <p class="user-name">{{ currentUser.userName }}</p>
           </div>
@@ -81,7 +82,7 @@
 
     <!--Toggle Sidebar in small screens---->
     <button *ngIf="(isMobile$ | async)" class="icon-btn toggle-btn" (click)="toggleSidebar()">
-      <span></span><span></span><span></span>
+      <i class="fa-solid fa-bars"></i>
     </button>
 
   </div>

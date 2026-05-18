@@ -10,7 +10,7 @@ import { UserPortalComponent } from './user-portal.component';
   ],
   imports: [
     CommonModule,
-    UserPortalRoutingModule
+    UserPortalRoutingModule,
   ]
 })
 export class UserPortalModule { }

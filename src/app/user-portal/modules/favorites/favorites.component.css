@@ -12,14 +12,14 @@
 .recipes-heading h2 {
   font-weight: 500;
   font-size: 1.25rem;
-  color: #1F263E;
+  color: #1f263e;
   margin-bottom: 3px;
 }
 
 .recipes-heading p {
   font-weight: 400;
   font-size: 0.875rem;
-  color: #323C47;
+  color: #323c47;
 }
 
 /*******table**********/
@@ -51,8 +51,10 @@ table thead th {
   font-weight: 500;
   font-size: 1rem;
 }
-.dropdown-item,table thead th{
-   font-family: var(--poppins);
+
+.dropdown-item,
+table thead th {
+  font-family: var(--poppins);
   color: #1f263e;
 }
 
@@ -64,7 +66,6 @@ table tbody td {
   color: #3a3a3d;
   vertical-align: middle;
 }
-
 
 table tbody tr {
   vertical-align: middle;
@@ -123,9 +124,11 @@ table .img-content img {
   border: transparent;
   padding: 11px;
 }
+
 .input-group {
   box-shadow: 0 0 0 0.15rem rgba(16, 45, 27, 0.15);
 }
+
 .input-group:focus-within {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 0.05rem #d6dbd6;
@@ -178,19 +181,147 @@ table .img-content img {
   color: var(--primary-color) !important;
 }
 
-.dropdown-item i{
+.dropdown-item i {
   color: var(--primary-color);
   width: 13px;
   height: 13px;
 }
 
 .dropdown-item {
-  color: #1F263E;
+  color: #1f263e;
   cursor: pointer !important;
   font-size: 14px;
   font-weight: 400;
 }
 
-.modal-dialog-centered{
+.modal-dialog-centered {
   padding: 60px;
 }
+
+.card {
+  transition: all .3s ease-in-out;
+  display:flex;
+  flex-direction: column;
+  flex:1
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.img-favorite {
+  width: 100%;
+  /* height: 170px; */
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 7px;
+}
+
+.img-favorite img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fav-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background: #ebfcf4;
+  border: 0.5px solid #9cf095;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fav-delete i {
+  font-size: 15px;
+  color: #2da344;
+}
+
+.fav-price-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #dafae0;
+  color: #1d372c;
+  border: 0.5px solid #22f090;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-family);
+}
+
+.fav-body {
+  padding: 14px;
+  flex:1;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.fav-name {
+  font-size: 20px;
+  color: var(--heading-color);
+  font-weight: 700;
+  font-family: var(--font-family);
+  margin: 0 0 8px;
+}
+
+.fav-desc {
+  font-family: var(--poppins);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: #666;
+}
+
+.fav-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.meta-row .meta-label {
+  font-size: 13px;
+  color: var(--heading-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  font-family: var(--font-family);
+  width: 62px;
+  flex-shrink: 0;
+}
+
+/* Tag  */
+.badge-tag,
+.badge-cat {
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--poppins);
+}
+
+.badge-tag {
+  background: #e1f5ee;
+  color: #085041;
+}
+
+/* Categories*/
+.badge-cat {
+  background: #eeedfe;
+  color: #3c3489;
+}
+

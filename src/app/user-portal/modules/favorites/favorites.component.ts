@@ -2,22 +2,21 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, debounceTime } from 'rxjs';
 import { Recipe, RecipeParams } from 'src/app/admin/recipes/models/recipe';
-import { RecipesService } from 'src/app/admin/recipes/services/recipes.service';
 import { GeneralService } from 'src/app/admin/services/general.service';
 import { Category } from 'src/app/admin/services/models/category';
 import { Tag } from 'src/app/admin/services/models/tag';
 import { environment } from 'src/environments/environment.development';
-import { ViewComponent } from './components/view/view.component';
+import { ViewComponent } from '../user-recipes/components/view/view.component';
+import { FavoritService } from './services/favorit.service';
+import { FavoriteRecipe } from './models/favoriteRecipe';
 
 @Component({
-  selector: 'app-user-recipes',
-  templateUrl: './user-recipes.component.html',
-  styleUrls: ['./user-recipes.component.css']
+  selector: 'app-favorites',
+  templateUrl: './favorites.component.html',
+  styleUrls: ['./favorites.component.css']
 })
-export class UserRecipesComponent {
- private readonly recipesService = inject(RecipesService);
+export class FavoritesComponent {
   private readonly generalService = inject(GeneralService)
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
@@ -27,7 +26,8 @@ export class UserRecipesComponent {
   bsModalRef?: BsModalRef;
 
   //Variables
-  recipes: Recipe[] = []
+  recipes: FavoriteRecipe[] = []
+  filteredRecipes: FavoriteRecipe[] = []
   tags: Tag[] = [];
   categories: Category[] = [];
   isLoading: boolean = false;
@@ -39,7 +39,7 @@ export class UserRecipesComponent {
   selectedCategoryId?: number;
 
   // pagination for recipes
-  pageSize: number = 10;
+  pageSize: number = 100;
   pageNumber: number = 1;
   total!: number;
 
@@ -74,6 +74,8 @@ export class UserRecipesComponent {
         pageSize: this.categoryPageSize,
         name: this.name
       }
+      //this.categoryPageSize, this.categoryPageNumber
+      //
     ).subscribe({
       next: (res) => {
         this.categories = [...this.categories, ...res.data];
@@ -109,14 +111,12 @@ export class UserRecipesComponent {
     const params: RecipeParams = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
-      name: this.name || '',
-      tagId: this.selectedTagId || undefined,
-      categoryId: this.selectedCategoryId || undefined
     };
 
-    this.recipesService.getRecipes(params).subscribe({
+    this.favoriteService.getUserFavoriteRecipes(params).subscribe({
       next: (res) => {
         this.recipes = res.data;
+        this.filteredRecipes = [...this.recipes];
         this.isLoading = false;
         this.total = res.totalNumberOfRecords
         this.cdr.detectChanges();
@@ -128,16 +128,27 @@ export class UserRecipesComponent {
     });
   }
 
-  //Search by name
-  searchSubject: Subject<string> = new Subject();
-  onSearchChange(value: string): void {
-    this.searchSubject.next(value);
-  }
+  applyFilters(): void {
+    this.filteredRecipes = this.recipes.filter((recipe) => {
+      // search by name
+      const matchesName = !this.name || recipe.recipe.name?.toLowerCase().includes(this.name.toLowerCase());
 
+      // filter by tag
+      const matchesTag = !this.selectedTagId || recipe.recipe.tag?.id === this.selectedTagId;
+
+      // filter by category
+      const matchesCategory = !this.selectedCategoryId || recipe.recipe.category.some(item => item.id === this.selectedCategoryId);
+      return matchesName && matchesTag && matchesCategory;
+    });
+  }
+  //Search by name
+  onSearchChange() {
+    this.applyFilters();
+  }
   //filteration Method
   onFilterChange(): void {
     this.pageNumber = 1; // reset pagination
-    this.loadRecipes();
+    this.applyFilters();
   }
 
   //Pagination Method
@@ -148,33 +159,39 @@ export class UserRecipesComponent {
 
   onView(recipe: Recipe): void {
     const initialState: ModalOptions = {
-      class: 'modal-md modal-dialog-centered',
+      class: 'modal-lg modal-dialog-centered',
       initialState: {
         recipe: recipe
       }
     };
     this.bsModalRef = this.modalService.show(ViewComponent, initialState);
-    // this.bsModalRef?.onHidden?.subscribe((res: any) => {
-    //   if (res.updated) {
-    //     this.loadRecipes();
-    //   }
-    // })
   }
 
-  ngOnInit(): void {
-  this.route.queryParams.subscribe(params => {
-    this.name = params['name'] || '';
-     this.pageNumber = 1;
-     this.loadRecipes()
-  });
-    // //debounce time for search by name
-    this.searchSubject.pipe(
-      debounceTime(500),
-    ).subscribe(() => {
-      this.pageNumber = 1;
-      this.loadRecipes()
-    })
+  private readonly favoriteService = inject(FavoritService)
+  addToFavorite(id: number): void {
+    this.favoriteService.addRecipeToFavorite(id).subscribe({
+      next: (res) => {
+        this.toastr.success('Recipe added to favorites', '!success');
+      },
+      error: (err) => {
+        this.toastr.error('Something went wrong');
+      }
+    });
+  }
 
+  deleteFromFavorite(id: number) {
+    this.favoriteService.deleteRecipefromFavorite(id).subscribe({
+      next: (res) => {
+        console.log('delete', res)
+        this.loadRecipes()
+        this.toastr.success('Recipe Removed Successfully', '!success');
+      },
+      error: (err) => {
+        this.toastr.error('Something went wrong');
+      }
+    });
+  }
+  ngOnInit(): void {
     this.loadRecipes();
     this.getTags();
     this.getCategories();

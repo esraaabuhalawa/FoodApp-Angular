@@ -52,5 +52,18 @@
       </div>
     </div>
   </div>
+  <!---error Mssage-------->
+  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
 </div>
 
+<div class="modal-footer border-top-0">
+  <button type="button" class="btn btn-outline-dark text-capitalize px-3 fw-semibold fs-6"
+    (click)="addToFavorite(recipe.id)">
+    <div class="spinner-border text-white" role="status" *ngIf="isLoading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    Add To Favorits
+  </button>
+</div>
