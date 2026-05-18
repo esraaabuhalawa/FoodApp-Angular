@@ -116,7 +116,7 @@ export class ProfileComponent {
     }).forEach(([key, val]) => formData.append(key, val as string));
 
 
-    formData.forEach((value, key) => console.log(key, value));
+    //formData.forEach((value, key) => console.log(key, value));
     if (this.imageLink && !profileImage) {
       // Convert existing image url to File
       const file = await this.fileUtilService.imageUrlToFile(this.assetUrl + this.imageLink, 'existing-image.png');
@@ -146,7 +146,6 @@ export class ProfileComponent {
       },
       complete: () => {
         this.isLoading = false;
-        // this.router.navigate(['/auth/verify-account']);
       }
     });
   }

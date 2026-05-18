@@ -3,11 +3,7 @@
 </div>
 
 <!-- Sidebar -->
-<aside class="sidebar"  [class.collapsed]="(isSidebarCollapsed$ | async)" [class.mobile-open]="(isMobileOpen$ | async)">
-<!--(mouseenter)="toggleSidebar()"-->
-  <button class="btn toggle-btn" (click)="toggleSidebar()">
-    <i class="fa-solid fa-angle-right"></i>
-  </button>
+<aside class="sidebar"  [class.mobile-open]="(isMobileOpen$ | async)">
   <div class="sidebar-logo">
     <img src="../../../../assets/images/nav-logo.svg" alt="logo">
   </div>
@@ -15,7 +11,7 @@
   <nav class="nav-section  d-flex flex-column h-100 justify-content-between">
     <ul class="nav">
       <ng-container *ngFor="let item of navMenu;let i = index;">
-        <li *ngIf="item.isActive">
+        <li *ngIf="item.isActive" (click)="onNavItemClick()">
           <a class="nav-item" [routerLink]="item.routerNavigate" routerLinkActive="active"> <!--[class.active]="isHomeActive(item)"-->
             <i class="nav-icon me-2" [ngClass]="item.icon"></i>
             <span class="nav-text text-capitalize">

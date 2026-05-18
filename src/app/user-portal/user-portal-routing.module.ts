@@ -4,7 +4,8 @@ import { HomeComponent } from '../shared/components/layout/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'user-recipes', loadChildren: () => import('./modules/user-recipes/user-recipes.module').then(m => m.UserRecipesModule) }
+  { path: 'user-recipes', loadChildren: () => import('./modules/user-recipes/user-recipes.module').then(m => m.UserRecipesModule) },
+  { path: 'favorites', loadChildren: () => import('./modules/favorites/favorites.module').then(m => m.FavoritesModule) }
 ];
 
 @NgModule({

@@ -11,6 +11,7 @@ import { ViewComponent } from 'src/app/admin/recipes/components/view/view.compon
 import { GeneralService } from '../services/general.service';
 import { Category } from '../services/models/category';
 import { Tag } from '../services/models/tag';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -25,7 +26,7 @@ export class RecipesComponent implements OnInit {
   private readonly generalService = inject(GeneralService)
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly toastr = inject(ToastrService);
-
+  private readonly route = inject(ActivatedRoute)
   //bootstrap model
   private readonly modalService = inject(BsModalService);
   bsModalRef?: BsModalRef;
@@ -154,7 +155,7 @@ export class RecipesComponent implements OnInit {
 
   onView(recipe: Recipe): void {
     const initialState: ModalOptions = {
-      class: 'modal-lg modal-dialog-centered',
+      class: 'modal-md modal-dialog-centered',
       initialState: {
         recipe: recipe
       }
@@ -186,6 +187,11 @@ export class RecipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  this.route.queryParams.subscribe(params => {
+    this.name = params['name'] || '';
+     this.pageNumber = 1;
+     this.loadRecipes()
+  });
     // //debounce time for search by name
     this.searchSubject.pipe(
       debounceTime(500),

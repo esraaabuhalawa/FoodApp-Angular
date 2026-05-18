@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 //import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { Subject, debounceTime } from 'rxjs';
 import { ChangePasswordComponent } from 'src/app/auth/components/change-password/change-password.component';
 import { CurrentUser } from 'src/app/auth/models/currentUser';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -24,7 +26,7 @@ import { environment } from 'src/environments/environment.development';
 export class NavbarComponent implements OnInit {
   private authService = inject(AuthService);
   readonly navbarUiService = inject(NavbarUiService);
-  //private readonly router = inject(Router)
+  private readonly router = inject(Router)
 
   assetUrl = environment.assestUrl;
   isMobile$ = this.navbarUiService.isMobile$;
@@ -70,7 +72,24 @@ export class NavbarComponent implements OnInit {
       initialState,
     );
   }
+  //Search by name
+  name: string = '';
+  searchSubject: Subject<string> = new Subject();
+  onSearchChange(value: string): void {
+    this.searchSubject.next(value);
+  }
+
   ngOnInit(): void {
+    this.searchSubject.pipe(debounceTime(500)).subscribe((value) => {
+      const route = this.isSuperAdmin
+        ? '/dashboard/admin/recipes'
+        : '/dashboard/user-portal/user-recipes';
+
+      this.router.navigate([route], {
+        queryParams: { name: value }
+      });
+    });
+    //get Current USer Data
     this.getUserData();
   }
 }

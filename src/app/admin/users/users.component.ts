@@ -64,6 +64,10 @@ export class UsersComponent {
   userRole(userGrop: Group) {
     return userGrop?.name === roleEnum.SuperAdmin ? 'Admin' : 'User'
   }
+
+  isUser(userGrop: Group) {
+    return userGrop?.name === roleEnum.SystemUser ? true : false
+  }
   //image Error
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;

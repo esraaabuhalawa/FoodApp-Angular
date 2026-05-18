@@ -1,6 +1,4 @@
 import { Component, inject, } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter, Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { roleEnum } from 'src/app/core/enums/role.enum';
 import { NavbarUiService } from 'src/app/core/services/navbar-ui.service';
@@ -19,11 +17,10 @@ interface Menu {
 export class SidebarComponent {
   private authService = inject(AuthService);
   readonly navbarUiService = inject(NavbarUiService);
-  private readonly router = inject(Router);
-  private destroy$ = new Subject<void>();
+  //private destroy$ = new Subject<void>();
 
   // use observables from service
-  isSidebarCollapsed$ = this.navbarUiService.isSidebarCollapsed$;
+ // isSidebarCollapsed$ = this.navbarUiService.isSidebarCollapsed$;
   isMobileOpen$ = this.navbarUiService.isMobileOpen$;
   isMobile$ = this.navbarUiService.isMobile$;
 
@@ -65,31 +62,34 @@ export class SidebarComponent {
     {
       label: 'Recipes',
       icon: 'fa-solid fa-border-all',
-      routerNavigate: '/dashboard/userPortal',
+      routerNavigate: '/dashboard/userPortal/user-recipes',
       isActive: this.isUser()
     },
     {
       label: 'Favorites',
       icon: 'fa-regular fa-heart',
-      routerNavigate: '/dashboard/userPortal',
+      routerNavigate: '/dashboard/userPortal/favorites',
       isActive: this.isUser()
     }
   ];;
 
 
-  onResize() {
-    this.navbarUiService.setMobile(window.innerWidth <= 768);
-  }
+  // onResize() {
+  //   this.navbarUiService.setMobile(window.innerWidth <= 992);
+  // }
 
   toggleSidebar() {
     this.navbarUiService.toggleSidebar();
   }
 
-  ngOnInit() {
+  onNavItemClick(): void {
+    if (window.innerWidth <= 992) {
+      this.navbarUiService.closeMobileMenu();
+    }
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    // this.destroy$.next();
+    // this.destroy$.complete();
   }
 }

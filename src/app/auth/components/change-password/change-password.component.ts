@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { confirmChangePasswordValidator, confirmPasswordValidator } from '../../validators/custom-validators';
+import { confirmChangePasswordValidator,} from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-change-password',
@@ -21,7 +20,6 @@ bsModalRef = inject(BsModalRef)
   forgotPassForm!: FormGroup
     constructor(private fb: FormBuilder, private authservice: AuthService,
       private toastr: ToastrService,
-      private router: Router
     ) {
       this.formInit();
     }
@@ -54,7 +52,6 @@ bsModalRef = inject(BsModalRef)
         next: (res) => {
           this.errorMessage = '';
           this.isLoading = false;
-          this.toastr.success(res.message, 'Success!');
         },
         error: (err) => {
           this.errorMessage = err.error.message;
@@ -63,8 +60,8 @@ bsModalRef = inject(BsModalRef)
         },
         complete :()=>{
           this.isLoading = false;
+          this.toastr.success('Your PAssword is Updated Successfully !', 'Success!');
           this.cancel();
-          this.authservice.logout();
         }
       });
     }

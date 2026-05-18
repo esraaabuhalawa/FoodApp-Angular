@@ -22,6 +22,9 @@
   color: #323C47;
 }
 
+.sidebar-dropdown.user-dropdown {
+  min-height: 80px;
+}
 /*******table**********/
 table {
   border-collapse: separate;
