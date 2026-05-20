@@ -14,7 +14,7 @@ export class AddEditComponent {
  constructor(public bsModalRef: BsModalRef, private fb: FormBuilder) { }
   private readonly categoryService = inject(CategoryService)
   private readonly toaster = inject(ToastrService)
-
+   loadingData:boolean = false;
   addCategoryForm!: FormGroup;
   isEditMode!: boolean;
   isViewMode!: boolean;
@@ -29,7 +29,7 @@ export class AddEditComponent {
       name: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
-  loadingData:boolean = false;
+
   patchForm(): void {
     this.loadingData = true
     this.categoryService.getCategoryById(this.category.id).subscribe({
@@ -40,7 +40,6 @@ export class AddEditComponent {
         });
       },
       error: (err) => {
-        console.error(err);
         this.loadingData = false
         this.toaster.error('Error In Fetching Data',"!Error")
       }
@@ -68,20 +67,15 @@ export class AddEditComponent {
       error: (err) => {
         this.errorMessage = err.error?.message || 'Something went wrong';
         this.toaster.error(err.error?.message || 'Error', 'Error!');
-        const backendErrors = err.error?.additionalInfo?.errors?.name;
-        if (backendErrors) {
-          this.errorMessage = backendErrors
-        }
         this.isLoading = false;
       },
       complete: () => {
         if (!this.isEditMode) {
           this.toaster.success("Category is Added Successfully", 'Success!');
-          this.bsModalRef.onHidden?.emit({ added: true });
         } else {
           this.toaster.success("Category is Updated Successfully", 'Success!');
-          this.bsModalRef.onHidden?.emit({ updated: true });
         }
+        this.bsModalRef.onHidden?.emit({ categoryUpdated: true });
         this.isLoading = false;
       }
     });

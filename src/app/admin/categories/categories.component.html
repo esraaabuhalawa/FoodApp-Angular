@@ -11,7 +11,7 @@
     </div>
     <div class="col-lg-4">
       <div class="button-container mt-4 mt-lg-0 w-100">
-        <button class="add-button" (click)="onpenCategoryModal(false,false)">
+        <button class="add-button" (click)="openCategoryModal(false,false)">
           Add New Category
         </button>
       </div>
@@ -78,14 +78,14 @@
 
               <!-- View -->
               <li role="menuitem">
-                <a class="dropdown-item" (click)="onpenCategoryModal(false,true,category)">
+                <a class="dropdown-item" (click)="openCategoryModal(false,true,category)">
                   <i class="fa fa-eye me-2"></i> View
                 </a>
               </li>
 
               <!-- Edit -->
               <li role="menuitem">
-                <a class="dropdown-item" (click)="onpenCategoryModal(true,false,category)">
+                <a class="dropdown-item" (click)="openCategoryModal(true,false,category)">
                   <i class="fa fa-pen me-2"></i> Edit
                 </a>
               </li>
@@ -103,7 +103,7 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls class="my-pagination" id="categories" [directionLinks]="true" [autoHide]="false"
+    [responsive]="true" (pageChange)="pageNumber = $event; loadCategories()">
+  </pagination-controls>
 </section>
-<pagination-controls class="my-pagination" id="categories" [directionLinks]="true" [autoHide]="false"
-  [responsive]="true" (pageChange)="pageNumber = $event; loadCategories()">
-</pagination-controls>

@@ -13,8 +13,9 @@ import { CurrentUser } from '../models/currentUser';
 export class AuthService {
   private http = inject(HttpClient)
   private router = inject(Router)
-  private userData = new BehaviorSubject<any>(null);
-  userData$ = this.userData.asObservable();
+
+  private currentUser = new BehaviorSubject<CurrentUser | null>(null);
+  currentUser$ = this.currentUser.asObservable();
 
   // onLogin(data: ILogin): Observable<any> {
   //   return this.http.post('Users/Login', data).pipe(
@@ -35,7 +36,6 @@ export class AuthService {
     let token = localStorage.getItem('token');
     if (token) {
       let userDecode = jwtDecode<IDecodedToken>(token);
-      this.userData.next(userDecode);
       localStorage.setItem('userRole', userDecode.userGroup);
     }
   }
@@ -71,7 +71,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userRole');
-    this.userData.next(null);
+    //this.userData.next(null);
     this.router.navigate(['/auth/login']);
   }
 

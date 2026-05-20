@@ -7,12 +7,11 @@ import { categoryParams } from './models/category';
   providedIn: 'root'
 })
 export class GeneralService {
-
   private readonly http = inject(HttpClient)
   getAllCategories(params: categoryParams): Observable<any> {
-      return this.http.get('Category', { params: { ...params } });
-    }
-      getAllTags(): Observable<any> {
-        return this.http.get(`tag`);
-      }
+    return this.http.get('Category', { params: { ...params } });
+  }
+  getAllTags(): Observable<any> {
+    return this.http.get(`tag`);
+  }
 }

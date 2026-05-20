@@ -81,10 +81,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchSubject.pipe(debounceTime(500)).subscribe((value) => {
+      console.log('search value:', value);
+
       const route = this.isSuperAdmin
         ? '/dashboard/admin/recipes'
-        : '/dashboard/user-portal/user-recipes';
-
+        : '/dashboard/userPortal/user-recipes';
+console.log('route:', route);
       this.router.navigate([route], {
         queryParams: { name: value }
       });

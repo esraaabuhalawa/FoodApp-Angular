@@ -84,8 +84,9 @@
         </tr>
       </tbody>
     </table>
-  </section>
-  <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
+
+    <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
     (pageChange)="pageNumber = $event; loadRecipes()">
   </pagination-controls>
+  </section>
 </div>

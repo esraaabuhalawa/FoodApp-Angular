@@ -90,8 +90,9 @@
         </div>
       </div>
     </div>
+
+    <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false"
+      [responsive]="true" (pageChange)="pageNumber = $event; loadRecipes()">
+    </pagination-controls>
   </section>
-  <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
-    (pageChange)="pageNumber = $event; loadRecipes()">
-  </pagination-controls>
 </div>

@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit {
     Object.entries({
       ...rest,
       phoneNumber: phoneNumber?.e164Number,
-      ...(profileImage && { profileImage })
+      profileImage :profileImage
     }).forEach(([key, val]) => formData.append(key, val as string));
 
     //formData.forEach((value, key) => console.log(key, value));
