@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { adminGuard } from '../../core/guards/admin.guard';
 import { userGuard } from '../../core/guards/user.guard';
 import { HomeComponent } from '../../shared/components/layout/home/home.component';
-import { ProfileComponent } from '../../shared/components/profile/profile.component';
+import { ProfileComponent } from '../../shared/components/ui/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -18,23 +18,25 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        title: 'Home page'
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        title : 'Profile Page'
       },
       {
         path: 'admin',
         canActivate: [adminGuard],
         loadChildren: () =>
-          import('../../admin/admin.module').then(m => m.AdminModule)
+          import('./admin/admin.module').then(m => m.AdminModule)
       },
       {
         path: 'userPortal',
         canActivate: [userGuard],
         loadChildren: () =>
-          import('../../user-portal/user-portal.module').then(m => m.UserPortalModule)
+          import('./user-portal/user-portal.module').then(m => m.UserPortalModule)
       },
     ]
   }

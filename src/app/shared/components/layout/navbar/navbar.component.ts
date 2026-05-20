@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { Subject, debounceTime } from 'rxjs';
-import { ChangePasswordComponent } from 'src/app/auth/components/change-password/change-password.component';
-import { CurrentUser } from 'src/app/auth/models/currentUser';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { ChangePasswordComponent } from 'src/app/shared/components/auth-components/change-password/change-password.component';
+import { CurrentUser } from 'src/app/features/auth/models/currentUser';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { roleEnum } from 'src/app/core/enums/role.enum';
 import { NavbarUiService } from 'src/app/core/services/navbar-ui.service';
 import { environment } from 'src/environments/environment.development';
@@ -86,7 +86,7 @@ export class NavbarComponent implements OnInit {
       const route = this.isSuperAdmin
         ? '/dashboard/admin/recipes'
         : '/dashboard/userPortal/user-recipes';
-console.log('route:', route);
+      console.log('route:', route);
       this.router.navigate([route], {
         queryParams: { name: value }
       });

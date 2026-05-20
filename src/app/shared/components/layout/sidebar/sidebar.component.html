@@ -13,9 +13,11 @@
       <ng-container *ngFor="let item of navMenu;let i = index;">
         <li *ngIf="item.isActive" (click)="onNavItemClick()">
           <a class="nav-item" [routerLink]="item.routerNavigate" routerLinkActive="active"> <!--[class.active]="isHomeActive(item)"-->
-            <i class="nav-icon me-2" [ngClass]="item.icon"></i>
-            <span class="nav-text text-capitalize">
-              {{ item.label }}
+            <span class="span-hover">
+              <i class="nav-icon me-2" [ngClass]="item.icon"></i>
+              <span class="nav-text text-capitalize">
+                {{ item.label }}
+              </span>
             </span>
           </a>
         </li>

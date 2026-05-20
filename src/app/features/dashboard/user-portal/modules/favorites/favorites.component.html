@@ -1,0 +1,98 @@
+<app-pages-header [title1]="'Favorite'" [title2]="'items'"
+  [description]="'You can now add your items that any user can order it from the Application and you can edit'"></app-pages-header>
+
+<div class="container-fluid mt-5">
+  <div class="filters">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <div class="w-100">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i> </span>
+            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="onSearchChange()"
+              placeholder="Search Here with name .." aria-label="name" aria-describedby="basic-addon1">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-2">
+        <ng-select [items]="tags" bindLabel="name" bindValue="id" placeholder="Select Tag" [(ngModel)]="selectedTagId"
+          (ngModelChange)="onFilterChange()">
+        </ng-select>
+      </div>
+
+      <div class="col-md-3 col-lg-2 mb-2">
+        <ng-select [items]="categories" bindLabel="name" bindValue="id" placeholder="Select Category"
+          [(ngModel)]="selectedCategoryId" (ngModelChange)="onFilterChange()" [virtualScroll]="true"
+          [loading]="isCategoriesLoading" (scrollToEnd)="loadMoreCategories()">
+        </ng-select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOADER -->
+  <section class="my-4 text-center" *ngIf="isLoading">
+    <app-loader></app-loader>
+  </section>
+
+  <!-- EMPTY STATE -->
+  <section class="my-4 text-center" *ngIf="!isLoading && filteredRecipes.length === 0">
+    <app-empty-state></app-empty-state>
+  </section>
+
+  <!-- DATA -->
+  <section class="my-3 " *ngIf="!isLoading && filteredRecipes.length > 0">
+    <div class="row g-4">
+      <div class="col-md-4 d-flex" *ngFor="let item of filteredRecipes | paginate: {id:'recipes', itemsPerPage: pageSize,
+      currentPage: pageNumber,
+      totalItems: total}">
+        <div class="card position-relative">
+          <div class="img-favorite position-relative">
+            <img [src]="assetUrl + item.recipe.imagePath" class="" (error)="onImageError($event)"
+              [alt]="item.recipe.name">
+
+            <button class="fav-delete" (click)="deleteFromFavorite(item.id)" aria-label="Remove from favorites">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+
+            <span class="fav-price-pill">{{ item.recipe.price }} EGP</span>
+          </div>
+
+          <div class="fav-body">
+            <div>
+              <h3 class="fav-name">{{ item.recipe.name }}</h3>
+
+              <p class="fav-desc">
+                {{(item?.recipe?.description?.length ?? 0) > 80? (item.recipe.description | slice:0:80) +
+                '....':
+                item.recipe.description}}
+              </p>
+            </div>
+
+            <div class="fav-meta">
+              <div class="meta-row" *ngIf="item.recipe.tag">
+                <span class="meta-label">
+                  <i class="ti ti-tag" aria-hidden="true"></i> Tag
+                </span>
+                <span class="badge-tag">{{ item.recipe.tag.name }}</span>
+              </div>
+
+              <div class="meta-row" *ngIf="item.recipe.category?.length">
+                <span class="meta-label">
+                  <i class="ti ti-category" aria-hidden="true"></i> Cats
+                </span>
+                <span class="badge-cat" *ngFor="let cat of item.recipe.category">
+                  {{ cat.name }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false"
+      [responsive]="true" (pageChange)="pageNumber = $event; getAllRecipes()">
+    </pagination-controls>
+  </section>
+</div>

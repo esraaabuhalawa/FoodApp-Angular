@@ -7,18 +7,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GeneralInterceptor } from './core/interceptors/general.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { ConfirmDialogComponent } from './shared/ui/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './shared/components/ui/confirm-dialog/confirm-dialog.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { HomeComponent } from './shared/components/layout/home/home.component';
-import { ViewComponent } from './admin/recipes/components/view/view.component';
-import { ErrorComponent } from './core/pages/error/error.component';
+import { ErrorComponent } from './shared/components/ui/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     ConfirmDialogComponent,
-    ViewComponent,
     ErrorComponent,
   ],
   imports: [

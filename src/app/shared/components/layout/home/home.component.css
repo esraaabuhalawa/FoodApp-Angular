@@ -37,10 +37,9 @@
   text-align: center;
 }
 .img-container img{
-  margin-bottom: -39px;
+  /* margin-bottom: -39px; */
+  animation: float 3s ease-in-out infinite;
 }
-
-
 /*****Recipes Section***********/
 .recipe-section{
   background-color: #F0FFEF;

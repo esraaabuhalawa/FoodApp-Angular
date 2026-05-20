@@ -57,6 +57,15 @@ a.nav-item {
   position: relative;
 }
 
+a.nav-item span.span-hover{
+  display: inline-block;
+  transition: all .5s ease-in-out;
+}
+
+a.nav-item:hover span.span-hover{
+  transform: translateX(10px);
+}
+
 a.nav-item.active::after {
   content: "";
   left: 0;
