@@ -80,7 +80,7 @@ export class CategoriesComponent {
   }
 
   //Add ,Edit and view modal
-  onpenCategoryModal(isEditMode: boolean, isViewMode: boolean,category?: Category): void {
+  openCategoryModal(isEditMode: boolean, isViewMode: boolean,category?: Category): void {
     const initialState: ModalOptions = {
       class: 'modal-lg modal-dialog-centered',
       initialState: {
@@ -92,7 +92,7 @@ export class CategoriesComponent {
     this.bsModalRef = this.modalService.show(AddEditComponent, initialState);
 
     this.bsModalRef?.onHidden?.subscribe((res: any) => {
-      if (res.added || res.updated) {
+      if (res.categoryUpdated) {
         this.loadCategories();
       }
     })

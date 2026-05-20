@@ -10,12 +10,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     LoaderComponent,
     EmptyStateComponent,
     PagesHeaderComponent,
-    FileDropComponent
+    FileDropComponent,
+    ProfileComponent
   ],
   imports: [
     DatePipe,
@@ -27,7 +29,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     NgxIntlTelInputModule
-    // NgSelectModule,
   ],
   exports: [
     LoaderComponent,
@@ -40,7 +41,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     BsDropdownModule,
     ReactiveFormsModule,
     DatePipe,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    ProfileComponent
   ]
 })
 export class SharedModule { }

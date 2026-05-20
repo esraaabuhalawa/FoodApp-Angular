@@ -125,16 +125,14 @@
                   <i class="fa fa-trash me-2"></i> Delete
                 </a>
               </li>
-
-
             </ul>
-
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-</section>
-<pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
+  <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false" [responsive]="true"
   (pageChange)="pageNumber = $event; loadRecipes()">
 </pagination-controls>
+</section>
+

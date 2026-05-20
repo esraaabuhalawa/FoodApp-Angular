@@ -142,12 +142,12 @@ export class AddEditComponent {
       error: (err) => {
         this.errorMessage = err.error?.message || 'Something went wrong';
         this.toastr.error(err.error?.message || 'Error', 'Error!');
-        const backendErrors = err.error?.additionalInfo?.errors;
-        if (backendErrors) {
-          Object.values(backendErrors).forEach((messages: any) => {
-            this.serverValidationErrors.push(...messages);
-          });
-        }
+        // const backendErrors = err.error?.additionalInfo?.errors;
+        // if (backendErrors) {
+        //   Object.values(backendErrors).forEach((messages: any) => {
+        //     this.serverValidationErrors.push(...messages);
+        //   });
+        // }
         this.isLoading = false;
       },
       complete: () => {

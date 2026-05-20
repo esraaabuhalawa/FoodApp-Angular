@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
-  recipe!: Recipe
   constructor(public bsModalRef: BsModalRef) { }
+  recipe!: Recipe
   assetUrl = environment.assestUrl
 
   cancel(): void {

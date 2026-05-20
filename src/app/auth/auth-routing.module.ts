@@ -5,14 +5,21 @@ import { RegisterComponent } from './pages/register/register.component';
 import { VerifyAccountComponent } from './pages/verify-account/verify-account.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: AuthComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-account', component: VerifyAccountComponent },
-  {path: 'reset-password', component: ResetPassComponent}
+  {
+    path: '',
+    component: AuthComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'login' },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'verify-account', component: VerifyAccountComponent },
+      { path: 'reset-password', component: ResetPassComponent }
+    ]
+  }
 ];
 
 @NgModule({

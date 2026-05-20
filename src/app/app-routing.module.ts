@@ -5,17 +5,19 @@ import { loggedGuard } from './core/guards/logged.guard';
 import { ErrorComponent } from './core/pages/error/error.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'auth',
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  {
+    path: 'auth',
     canActivate: [loggedGuard],
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
   {
     path: 'dashboard',
     canActivate: [authGuard],
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
-  {path: '**' , component:ErrorComponent}
+  { path: '**', component: ErrorComponent }
 ];
 
 @NgModule({

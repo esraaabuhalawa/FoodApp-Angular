@@ -59,6 +59,7 @@ export class ResetPassComponent {
       },
       complete :()=>{
          this.router.navigate(['/auth']);
+         localStorage.removeItem('emailForPasswordReset');
          this.isLoading = false
       }
     });

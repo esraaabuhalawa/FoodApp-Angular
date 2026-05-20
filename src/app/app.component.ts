@@ -1,5 +1,5 @@
 import { Component, } from '@angular/core';
-//import { AuthService } from './auth/services/auth.service';
+// import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,9 @@ import { Component, } from '@angular/core';
 })
 export class AppComponent {
   title = 'food-app';
-  // private authService = inject(AuthService);
+  //  private authService = inject(AuthService);
 
   // ngOnInit() {
-  //   this.authService.loadUserFromToken();
+  //    this.authService.getCurrentUserData();
   // }
 }

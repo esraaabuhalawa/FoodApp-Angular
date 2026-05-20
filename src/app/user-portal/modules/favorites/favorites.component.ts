@@ -39,7 +39,7 @@ export class FavoritesComponent {
   selectedCategoryId?: number;
 
   // pagination for recipes
-  pageSize: number = 100;
+  pageSize: number = 5;
   pageNumber: number = 1;
   total!: number;
 
@@ -74,8 +74,6 @@ export class FavoritesComponent {
         pageSize: this.categoryPageSize,
         name: this.name
       }
-      //this.categoryPageSize, this.categoryPageNumber
-      //
     ).subscribe({
       next: (res) => {
         this.categories = [...this.categories, ...res.data];
@@ -117,6 +115,7 @@ export class FavoritesComponent {
       next: (res) => {
         this.recipes = res.data;
         this.filteredRecipes = [...this.recipes];
+       // console.log(res)
         this.isLoading = false;
         this.total = res.totalNumberOfRecords
         this.cdr.detectChanges();
@@ -184,7 +183,7 @@ export class FavoritesComponent {
       next: (res) => {
         console.log('delete', res)
         this.loadRecipes()
-        this.toastr.success('Recipe Removed Successfully', '!success');
+        this.toastr.success('Recipe Removed from your Favorits Successfully', '!success');
       },
       error: (err) => {
         this.toastr.error('Something went wrong');
