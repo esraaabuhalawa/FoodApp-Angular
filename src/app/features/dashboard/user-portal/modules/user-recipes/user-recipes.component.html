@@ -1,0 +1,92 @@
+<div class="container-fluid mt-2">
+  <div class="filters">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <div class="w-100">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i> </span>
+            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="onSearchChange($event)"
+              placeholder="Search Here with name .." aria-label="name" aria-describedby="basic-addon1">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-2">
+        <ng-select [items]="tags" bindLabel="name" bindValue="id" placeholder="Select Tag" [(ngModel)]="selectedTagId"
+          (ngModelChange)="onFilterChange()">
+        </ng-select>
+      </div>
+
+      <div class="col-md-3 col-lg-2 mb-2">
+        <ng-select [items]="categories" bindLabel="name" bindValue="id" placeholder="Select Category"
+          [(ngModel)]="selectedCategoryId" (ngModelChange)="onFilterChange()" [virtualScroll]="true"
+          [loading]="isCategoriesLoading" (scrollToEnd)="loadMoreCategories()">
+        </ng-select>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- LOADER -->
+  <section class="my-4 text-center" *ngIf="isLoading">
+    <app-loader></app-loader>
+  </section>
+
+  <!-- EMPTY STATE -->
+  <section class="my-4 text-center" *ngIf="!isLoading && recipes.length === 0">
+    <app-empty-state></app-empty-state>
+  </section>
+
+  <!-- DATA -->
+  <section class="my-3 table-responsive" *ngIf="!isLoading && recipes.length > 0">
+    <table class="table table-striped mb-5">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Tag</th>
+          <th scope="col">Category</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recipe of recipes | paginate: {id:'recipes', itemsPerPage: pageSize,
+      currentPage: pageNumber,
+      totalItems: total}">
+          <td> {{recipe?.name}}</td>
+          <td class="text-center align-middle">
+            <div class="img-content ">
+              <img [src]="assetUrl + recipe?.imagePath" (error)="onImageError($event)" [alt]="recipe?.name">
+            </div>
+          </td>
+          <td>{{recipe?.price}}</td>
+          <td>{{(recipe?.description?.length ?? 0) > 50? (recipe?.description | slice:0:50) + '....':
+            recipe?.description}}</td>
+          <td>{{recipe?.tag?.name}}</td>
+          <td>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+              <span class="py-1 px-2 rounded-1" style="background-color: rgb(244, 248, 242);"
+                *ngFor="let category of recipe?.category;let i = index">
+                {{ category?.name }}
+              </span>
+            </div>
+          </td>
+          <td>
+            <span role="menuitem">
+              <a class="dropdown-item" (click)="onView(recipe)">
+                <i class="fa fa-eye me-2"></i>
+              </a>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls class="my-pagination" id="recipes" [directionLinks]="true" [autoHide]="false"
+      [responsive]="true" (pageChange)="pageNumber = $event; getAllRecipes()">
+    </pagination-controls>
+  </section>
+</div>

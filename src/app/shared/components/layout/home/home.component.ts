@@ -1,12 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { CurrentUser } from 'src/app/auth/models/currentUser';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { RouterLink } from '@angular/router';
+import { CurrentUser } from 'src/app/features/auth/models/currentUser';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { roleEnum } from 'src/app/core/enums/role.enum';
 
 @Component({
+  standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  imports: [RouterLink, CommonModule]
 })
 export class HomeComponent implements OnInit {
   private authService = inject(AuthService);

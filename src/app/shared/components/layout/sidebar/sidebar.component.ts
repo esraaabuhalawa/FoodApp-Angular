@@ -1,5 +1,5 @@
 import { Component, inject, } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { roleEnum } from 'src/app/core/enums/role.enum';
 import { NavbarUiService } from 'src/app/core/services/navbar-ui.service';
 interface Menu {
@@ -20,7 +20,7 @@ export class SidebarComponent {
   //private destroy$ = new Subject<void>();
 
   // use observables from service
- // isSidebarCollapsed$ = this.navbarUiService.isSidebarCollapsed$;
+  // isSidebarCollapsed$ = this.navbarUiService.isSidebarCollapsed$;
   isMobileOpen$ = this.navbarUiService.isMobileOpen$;
   isMobile$ = this.navbarUiService.isMobile$;
 
