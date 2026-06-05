@@ -6,7 +6,6 @@ import { UsersComponent } from './users.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ViewComponent } from './components/view/view.component';
 
-
 @NgModule({
   declarations: [
     UsersComponent,

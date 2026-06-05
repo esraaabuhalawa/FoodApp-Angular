@@ -63,6 +63,7 @@ export class ChangePasswordComponent implements OnDestroy {
         this.errorMessage = err.error.message;
         this.toastr.error(err.error.message, 'Error!');
         this.isLoading = false;
+        this.cancel();
       },
       complete: () => {
         this.isLoading = false;
